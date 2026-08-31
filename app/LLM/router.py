@@ -23,13 +23,15 @@ from __future__ import annotations
 import os
 from typing import Any
 
-# Import the concrete provider(s).  Import errors are deliberately not
+from .base import LLMBase
+
 # suppressed – a missing provider is a configuration problem that should
 # surface early.
 from .ollama import OllamaLLM
 
 # Placeholder for future imports, e.g.:
 # from .openrouter import OpenRouterLLM
+from .openrouter import OpenRouterLLM
 
 
 def _provider_factory(provider_name: str, model: str, **kwargs: Any) -> Any:
@@ -43,6 +45,45 @@ def _provider_factory(provider_name: str, model: str, **kwargs: Any) -> Any:
     provider_name = provider_name.lower()
     if provider_name == "ollama":
         return OllamaLLM(model, **kwargs)
+    if provider_name == "openrouter":
+        return OpenRouterLLM(model, **kwargs)
+    if provider_name == "fallback":
+        # Fallback provider: try ollama first, then openrouter.
+        # We construct a simple wrapper that attempts each in order.
+        class FallbackLLM(LLMBase):
+            def __init__(self, model: str, **kw):
+                super().__init__(model)
+                self.providers = []
+                # Instantiate primary (ollama) – ignore errors during construction.
+                try:
+                    self.providers.append(OllamaLLM(model, **kw))
+                except Exception:
+                    pass
+                try:
+                    self.providers.append(OpenRouterLLM(model, **kw))
+                except Exception:
+                    pass
+                if not self.providers:
+                    raise ValueError("No valid LLM providers available for fallback")
+
+            def _run(self, method: str, *args, **kwargs):
+                last_exc = None
+                for prov in self.providers:
+                    try:
+                        return getattr(prov, method)(*args, **kwargs)
+                    except Exception as exc:
+                        last_exc = exc
+                if last_exc:
+                    raise last_exc
+                raise RuntimeError("FallbackLLM failed without exception")
+
+            def generate(self, prompt: str) -> str:
+                return self._run("generate", prompt)
+
+            def chat(self, messages):
+                return self._run("chat", messages)
+
+        return FallbackLLM(model, **kwargs)
     # Future providers can be added here.
     raise ValueError(f"Unsupported LLM provider: {provider_name}")
 

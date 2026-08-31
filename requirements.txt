@@ -1,5 +1,18 @@
-Pydantic
+# Core
+pydantic
 httpx
 python-dotenv
-Rich
-Typer
+
+# CLI
+rich
+typer
+
+# LLM / Agent orchestration
+langgraph
+
+# Web research
+beautifulsoup4
+lxml
+
+# Document processing
+pymupdf
