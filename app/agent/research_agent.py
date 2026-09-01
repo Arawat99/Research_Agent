@@ -17,6 +17,8 @@ from __future__ import annotations
 from typing import Optional
 
 from app.LLM import get_llm
+from app.tools.fetch import fetch_source
+from app.tools.search import web_search
 
 
 class ResearchAgent:
@@ -38,6 +40,28 @@ class ResearchAgent:
         # The LLM abstraction handles provider selection and endpoint config.
         self.llm = get_llm(model=model, provider=provider)
 
+    def _run_web_tools(self, query: str):
+        """Run the search/fetch tools when the prompt needs live web grounding."""
+        results = web_search(query, max_results=3)
+        if not results:
+            return []
+
+        sources = []
+        for result in results:
+            url = result.get("url")
+            if not url:
+                continue
+            try:
+                source = fetch_source(url)
+                sources.append({
+                    "title": source.title,
+                    "url": str(source.url),
+                    "snippet": source.content[:600] if source.content else result.get("snippet", ""),
+                })
+            except Exception:
+                sources.append(result)
+        return sources
+
     def ask(self, query: str) -> str:
         """Send *query* to the LLM and return its answer.
 
@@ -46,4 +70,19 @@ class ResearchAgent:
         """
         if not isinstance(query, str) or not query.strip():
             raise ValueError("Query must be a non‑empty string")
+
+        if any(word in query.lower() for word in ["what is", "who is", "when did", "where is", "how does", "latest", "news", "compare", "explain", "research", "define"]):
+            sources = self._run_web_tools(query)
+            if sources:
+                context = "\n\n".join(
+                    f"Source: {item['title']}\nURL: {item['url']}\nContent: {item['snippet']}"
+                    for item in sources
+                )
+                enhanced_prompt = (
+                    "Use the web sources below to answer the user's question. "
+                    "Cite the source material, and if the sources disagree, say so.\n\n"
+                    f"Question: {query}\n\nSources:\n{context}"
+                )
+                return self.llm.generate(enhanced_prompt)
+
         return self.llm.generate(query)

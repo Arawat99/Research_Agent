@@ -26,8 +26,9 @@ def _duckduckgo_html(query: str) -> str:
     """
     encoded = urllib.parse.urlencode({"q": query})
     url = f"https://html.duckduckgo.com/html/?{encoded}"
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; ResearchAgent/1.0; +https://example.com)"}
     with httpx.Client(timeout=10.0) as client:
-        resp = client.get(url, follow_redirects=True)
+        resp = client.get(url, follow_redirects=True, headers=headers)
         resp.raise_for_status()
         return resp.text
 
@@ -66,12 +67,18 @@ def web_search(query: str, max_results: int = 5) -> List[Dict[str, str]]:
     # We collect up to *max_results* anchors directly.
     for a_tag in soup.select("a.result__a")[:max_results]:
         raw_href = a_tag.get("href", "")
-        # The real destination URL is often stored in the "uddg" query parameter.
-        parsed_href = urllib.parse.urlparse(raw_href)
+        # DuckDuckGo often gives protocol-relative links such as "//duckduckgo.com/l/?uddg=..."
+        # or a direct destination URL. Normalise both forms before extracting the final destination.
+        normalized_href = raw_href if raw_href.startswith(("http://", "https://")) else f"https:{raw_href}"
+        parsed_href = urllib.parse.urlparse(normalized_href)
         qs = urllib.parse.parse_qs(parsed_href.query)
-        url = qs.get("uddg", [raw_href])[0]
+        if qs.get("uddg"):
+            url = qs["uddg"][0]
+        elif parsed_href.scheme and parsed_href.netloc:
+            url = normalized_href
+        else:
+            url = raw_href
         title = a_tag.get_text(strip=True)
-        # Attempt to locate a sibling snippet element.
         snippet_tag = a_tag.find_next("a", class_="result__snippet") or a_tag.find_next("div", class_="result__snippet")
         snippet = snippet_tag.get_text(strip=True) if snippet_tag else ""
         results.append({"title": title, "url": url, "snippet": snippet})
