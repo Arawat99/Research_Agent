@@ -34,10 +34,11 @@ class OpenRouterLLM(LLMBase):
 
     def __init__(self, model: str, api_key: str | None = None, **_: Any):
         super().__init__(model)
-        self.api_key = api_key or os.getenv("OPEN_ROUTER")
+        env_keys = ("OPEN_ROUTER", "OPENROUTER_API_KEY", "OPENAI_API_KEY")
+        self.api_key = api_key or next((os.getenv(key) for key in env_keys if os.getenv(key)), None)
         if not self.api_key:
             raise OpenRouterError(
-                "OpenRouter API key not found. Set the OPEN_ROUTER environment variable."
+                "OpenRouter API key not found. Set OPEN_ROUTER, OPENROUTER_API_KEY, or OPENAI_API_KEY."
             )
         # Base URL for OpenRouter – use the public API.
         self.base_url = "https://openrouter.ai/api/v1/"

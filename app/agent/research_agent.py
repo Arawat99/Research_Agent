@@ -25,16 +25,16 @@ class ResearchAgent:
     Parameters
     ----------
     model: str, optional
-        Identifier of the language model to use. Defaults to
-        ``"gpt-oss:120b-cloud"`` which resolves to a high‑capacity Claude model
-        when the ``claude‑code`` environment is available.
+        Identifier of the language model to use. Defaults to the free
+        OpenRouter model ``"openrouter/free"`` so the project works with the
+        free-tier provider options.
     provider: str | None, optional
         Explicit provider name (e.g., ``"ollama"``). If omitted the function
         falls back to the ``LLM_PROVIDER`` environment variable or the
         built‑in default.
     """
 
-    def __init__(self, model: str = "gpt-oss:120b-cloud", provider: Optional[str] = None):
+    def __init__(self, model: str = "openrouter/free", provider: Optional[str] = None):
         # The LLM abstraction handles provider selection and endpoint config.
         self.llm = get_llm(model=model, provider=provider)
 

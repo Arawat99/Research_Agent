@@ -48,19 +48,19 @@ def _provider_factory(provider_name: str, model: str, **kwargs: Any) -> Any:
     if provider_name == "openrouter":
         return OpenRouterLLM(model, **kwargs)
     if provider_name == "fallback":
-        # Fallback provider: try ollama first, then openrouter.
+        # Fallback provider: try OpenRouter first, then Ollama.
         # We construct a simple wrapper that attempts each in order.
         class FallbackLLM(LLMBase):
             def __init__(self, model: str, **kw):
                 super().__init__(model)
                 self.providers = []
-                # Instantiate primary (ollama) – ignore errors during construction.
+                # Instantiate primary (OpenRouter) – ignore errors during construction.
                 try:
-                    self.providers.append(OllamaLLM(model, **kw))
+                    self.providers.append(OpenRouterLLM(model, **kw))
                 except Exception:
                     pass
                 try:
-                    self.providers.append(OpenRouterLLM(model, **kw))
+                    self.providers.append(OllamaLLM(model, **kw))
                 except Exception:
                     pass
                 if not self.providers:
@@ -88,14 +88,31 @@ def _provider_factory(provider_name: str, model: str, **kwargs: Any) -> Any:
     raise ValueError(f"Unsupported LLM provider: {provider_name}")
 
 
+def _resolve_default_provider() -> str:
+    """Choose a sensible default provider for the current environment."""
+    configured = (os.getenv("LLM_PROVIDER") or "").strip().lower()
+    if configured:
+        return configured
+
+    openrouter_keys = ("OPEN_ROUTER", "OPENROUTER_API_KEY", "OPENAI_API_KEY")
+    if any(os.getenv(key) for key in openrouter_keys):
+        return "openrouter"
+
+    if os.getenv("OLLAMA_ENDPOINT"):
+        return "ollama"
+
+    return "fallback"
+
+
 def get_llm(model: str, provider: str | None = None, **kwargs: Any) -> Any:
     """Factory function that returns a concrete LLM instance.
 
     The function first checks the *provider* argument; if omitted it falls
-    back to the ``LLM_PROVIDER`` environment variable, finally defaulting to
-    ``"ollama"``.  Additional provider‑specific keyword arguments can be passed
-    through ``**kwargs``.
+    back to the ``LLM_PROVIDER`` environment variable, then prefers OpenRouter
+    when a compatible API key is present, and otherwise falls back to Ollama or
+    the built-in fallback wrapper.
+    Additional provider‑specific keyword arguments can be passed through ``**kwargs``.
     """
     if provider is None:
-        provider = os.getenv("LLM_PROVIDER", "ollama")
+        provider = _resolve_default_provider()
     return _provider_factory(provider, model, **kwargs)

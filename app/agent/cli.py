@@ -24,7 +24,7 @@ app = typer.Typer(add_completion=False, help="Simple Research Agent CLI")
 @app.command()
 def ask(
     query: str = typer.Argument(..., help="The question or research query to send to the LLM"),
-    model: str = typer.Option("gpt-oss:120b-cloud", "--model", help="Model identifier to use"),
+    model: str = typer.Option("openrouter/free", "--model", help="Model identifier to use"),
     provider: str | None = typer.Option(None, "--provider", help="LLM provider name (overrides LLM_PROVIDER env var)"),
 ) -> None:
     """Send *query* to the LLM and print the answer.

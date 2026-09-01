@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Simple custom command to run a ResearchAgent query.
+# Usage: research "Your natural‑language query"
+# This script activates the project's virtual environment (if present)
+# and invokes the ResearchAgent directly, bypassing the Typer CLI.
+
+# Determine the directory containing this script (handles spaces).
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Activate the virtual environment if it exists.
+if [ -f "$SCRIPT_DIR/venv/bin/activate" ]; then
+    # shellcheck source=/dev/null
+    source "$SCRIPT_DIR/venv/bin/activate"
+fi
+
+# Ensure a query was provided.
+if [ "$#" -eq 0 ]; then
+    echo "Usage: research \"Your query\""
+    exit 1
+fi
+
+# Run the ResearchAgent directly via a one‑liner.
+python -c "import sys; from app.agent.research_agent import ResearchAgent; query=' '.join(sys.argv[1:]); print(ResearchAgent().ask(query))" "$@"
