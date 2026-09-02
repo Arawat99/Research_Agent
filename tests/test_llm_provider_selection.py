@@ -17,13 +17,13 @@ class LLMProviderSelectionTests(unittest.TestCase):
         os.environ.clear()
         os.environ.update(self._original_env)
 
-    def test_default_provider_prefers_openrouter_when_key_present(self):
+    def test_default_provider_uses_fallback_when_key_present(self):
         os.environ["OPENROUTER_API_KEY"] = "test-key"
 
         from app.LLM import get_llm
 
         llm = get_llm("openrouter/free")
-        self.assertEqual(type(llm).__name__, "OpenRouterLLM")
+        self.assertEqual(type(llm).__name__, "FallbackLLM")
 
     def test_openrouter_accepts_standard_env_name(self):
         os.environ["OPENROUTER_API_KEY"] = "test-key"

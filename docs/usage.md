@@ -1,66 +1,100 @@
 # Usage Guide
 
-## As a Python library
+## Activate the project environment
+
+This project expects to run inside a virtual environment:
+
+```bash
+cd "/home/chrisjoshua/Personal AI Assistant/projects/research agent"
+source venv/bin/activate
+```
+
+## Use the agent as a Python library
 
 ```python
 from app.agent import ResearchAgent
 
-# Initialise the agent – you can optionally specify a model name
-agent = ResearchAgent(model="gpt-oss:120b-cloud")
-
-# Ask a question and receive the answer
+agent = ResearchAgent(model="openrouter/free")
 answer = agent.ask("What is the tallest mountain on Earth?")
 print(answer)
 ```
 
-The `ResearchAgent` class is deliberately tiny – it only creates an LLM instance via the project's `get_llm` factory and calls its `generate` method.
+The agent will attempt lightweight web grounding for research-style prompts and pass the retrieved sources into the LLM prompt when they are available.
 
-### Customising the provider
+## Run the iterative research loop
 
-Set the environment variable `LLM_PROVIDER` to the identifier of a provider that implements the `LLMBase` interface (e.g., `ollama`, `openrouter`). For Ollama, you can also set `OLLAMA_ENDPOINT` if the server is not running on the default `http://localhost:11434`.
+The current agent supports a queue-driven research method that plans subtasks and gathers evidence until enough sources exist:
+
+```python
+from app.agent import ResearchAgent
+
+agent = ResearchAgent(model="openrouter/free")
+answer = agent.research(
+    "What is the impact of AI on software engineering teams?",
+    max_rounds=3,
+    min_sources=2,
+    num_tasks=3,
+)
+print(answer)
+```
+
+This is the recommended path for multi-step research because it uses a task queue rather than injecting a single raw prompt into the model.
+
+## Provider configuration
+
+Set the provider through environment variables or pass it directly when creating the agent.
+
+### OpenRouter
+
+```bash
+export OPENROUTER_API_KEY="your-key"
+export LLM_PROVIDER=openrouter
+```
+
+### Ollama
 
 ```bash
 export LLM_PROVIDER=ollama
-export OLLAMA_ENDPOINT=http://my-ollama-host:11434
+export OLLAMA_ENDPOINT=http://localhost:11434
 ```
 
-## From the command line
+### Direct per-instance override
 
-The repository ships a small CLI built with **Typer**. Run it with the module‑style invocation:
+```python
+agent = ResearchAgent(model="openrouter/free", provider="openrouter")
+```
+
+## Command line usage
+
+Run the CLI from the project root:
 
 ```bash
-# Activate your virtual environment first
 source venv/bin/activate
-
-# Ask a question via the CLI
-python -m app.agent.cli ask "Explain the concept of memoization."
+research "Explain the concept of memoization." 
 ```
 
 ### CLI options
 
-- `--model TEXT` – Model identifier (default: `gpt-oss:120b-cloud`).
-- `--provider TEXT` – Override the provider without touching the environment.
+- `--model` – model identifier to use
+- `--provider` – provider override such as `openrouter` or `ollama`
 
-Example with custom model:
+## Guardrails in the research loop
+
+The research loop is deliberately bounded:
+
+- it stops when the task queue is empty
+- it stops when evidence is sufficient
+- it stops when no new sources are found for multiple rounds
+
+This avoids endless retries while still allowing the agent to continue searching if more evidence is required.
+
+## Running tests
 
 ```bash
-python -m app.agent.cli ask "Describe the builder pattern." --model "claude-sonnet-5"
+source venv/bin/activate
+python -m unittest discover -s tests -q
 ```
-
-## Running the tests (future work)
-
-Currently no automated tests exist for the agent, but you can quickly sanity‑check the implementation:
-
-```bash
-python - <<'PY'
-from app.agent import ResearchAgent
-agent = ResearchAgent()
-print(agent.ask('What is the capital of Japan?'))
-PY
-```
-
-If the LLM server is reachable, you should see a sensible answer.
 
 ---
 
-*Generated with Claude Code*
+*Updated to reflect the queued, iterative research workflow and the current provider defaults.*

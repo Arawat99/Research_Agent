@@ -89,14 +89,19 @@ def _provider_factory(provider_name: str, model: str, **kwargs: Any) -> Any:
 
 
 def _resolve_default_provider() -> str:
-    """Choose a sensible default provider for the current environment."""
+    """Choose a sensible default provider for the current environment.
+
+    A fallback provider is preferred by default because it keeps the agent
+    responsive even when one backend is unavailable or returns malformed
+    responses. It tries OpenRouter first, then falls back to Ollama.
+    """
     configured = (os.getenv("LLM_PROVIDER") or "").strip().lower()
     if configured:
         return configured
 
     openrouter_keys = ("OPEN_ROUTER", "OPENROUTER_API_KEY", "OPENAI_API_KEY")
     if any(os.getenv(key) for key in openrouter_keys):
-        return "openrouter"
+        return "fallback"
 
     if os.getenv("OLLAMA_ENDPOINT"):
         return "ollama"

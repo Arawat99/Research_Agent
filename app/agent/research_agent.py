@@ -92,9 +92,12 @@ class ResearchAgent:
         try:
             return self.llm.generate(prompt)
         except OpenRouterError as exc:
+            # Fallback providers should be used by default, but if the configured
+            # provider still fails we return a useful answer instead of crashing.
             return (
                 "I could not get a valid model response from the configured provider. "
-                f"The provider returned an empty or malformed payload: {exc}"
+                f"The provider returned an empty or malformed payload: {exc}. "
+                "Please check the provider configuration or try again later."
             )
         except Exception as exc:
             return (

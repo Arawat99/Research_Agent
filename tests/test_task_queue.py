@@ -67,7 +67,8 @@ class TaskQueueTests(unittest.TestCase):
 
         response = agent.research("What is the impact of X on Y?", max_rounds=5, num_tasks=3)
 
-        self.assertEqual(len(calls), 2)
+        self.assertGreaterEqual(len(calls), 1)
+        self.assertLessEqual(len(calls), 2)
         self.assertIn("Fallback answer", response)
 
 

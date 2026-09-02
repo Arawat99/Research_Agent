@@ -1,27 +1,27 @@
 # Documentation for the Research Agent
 
-This folder contains detailed documentation that complements the top‑level README.
+This folder contains the current project documentation for the queue-driven research workflow.
 
 ## Overview (`docs/overview.md`)
 
-- Purpose of the project.
-- High‑level architecture (LLM abstraction, data models, research agent).
-- How the components fit together.
+- current architecture and research-loop design
+- task queue and evidence-based iteration
+- provider abstraction and runtime guardrails
 
 ## Usage (`docs/usage.md`)
 
-- Library usage example (same as README but with step‑by‑step instructions).
-- CLI usage with optional flags.
-- Environment configuration (LLM provider, endpoint, model selection).
+- Python library usage with `ResearchAgent.ask(...)`
+- iterative `ResearchAgent.research(...)` flow
+- environment configuration for OpenRouter and Ollama
+- CLI examples and test commands
 
 ## API (`docs/api.md`)
 
-- `ResearchAgent` class signature.
-- Public methods:
-  - `__init__(model: str = "gpt-oss:120b-cloud", provider: Optional[str] = None)` – creates the agent.
-  - `ask(query: str) -> str` – sends the query to the LLM and returns the answer.
-- Possible extensions (chat, custom prompting).
+- `ResearchAgent` public methods
+- `ResearchPlanner` task decomposition
+- `TaskQueue` execution ordering
+- LLM provider selection and runtime behavior
 
 ---
 
-*Generated with Claude Code*
+*Updated to match the current implementation.*
