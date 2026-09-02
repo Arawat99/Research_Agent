@@ -75,7 +75,9 @@ class OpenRouterLLM(LLMBase):
         """Generate a completion using the chat endpoint with a single user message.
 
         The OpenRouter chat endpoint returns a ``choices`` list; we extract the
-        ``content`` of the first ``message``.
+        ``content`` of the first ``message``. Some providers occasionally return
+        empty or structurally different payloads (for example ``content=None``),
+        so we normalise those cases instead of crashing on a ``NoneType``.
         """
         messages = [{"role": "user", "content": prompt}]
         payload = {
@@ -85,11 +87,41 @@ class OpenRouterLLM(LLMBase):
             "stream": False,
         }
         data = self._post("chat/completions", payload)
-        # OpenAI‑compatible response: data["choices"][0]["message"]["content"]
-        try:
-            return data["choices"][0]["message"]["content"].strip()
-        except Exception as exc:
-            raise OpenRouterError("Unexpected response structure from OpenRouter") from exc
+
+        choices = data.get("choices") or []
+        if not choices:
+            if data.get("error"):
+                msg = data["error"].get("message") if isinstance(data["error"], dict) else str(data["error"])
+                raise OpenRouterError(f"OpenRouter returned an error: {msg}")
+            raise OpenRouterError("OpenRouter returned no choices in the response")
+
+        message = choices[0].get("message") if isinstance(choices[0], dict) else {}
+        content = message.get("content") if isinstance(message, dict) else None
+
+        if isinstance(content, str):
+            text = content.strip()
+            if text:
+                return text
+
+        if isinstance(content, list):
+            parts = []
+            for item in content:
+                if isinstance(item, dict):
+                    text = item.get("text") or item.get("content")
+                    if isinstance(text, str):
+                        parts.append(text)
+                elif isinstance(item, str):
+                    parts.append(item)
+            combined = "\n".join(parts).strip()
+            if combined:
+                return combined
+
+        error = data.get("error")
+        if error:
+            msg = error.get("message") if isinstance(error, dict) else str(error)
+            raise OpenRouterError(f"OpenRouter returned an error: {msg}")
+
+        raise OpenRouterError("Unexpected response structure from OpenRouter")
 
     def chat(self, messages: List[Dict[str, Any]]) -> str:
         """Run a chat completion using the provided *messages* list.
@@ -101,10 +133,31 @@ class OpenRouterLLM(LLMBase):
             "stream": False,
         }
         data = self._post("chat/completions", payload)
-        try:
-            return data["choices"][0]["message"]["content"].strip()
-        except Exception as exc:
-            raise OpenRouterError("Unexpected response structure from OpenRouter chat") from exc
+        choices = data.get("choices") or []
+        if not choices:
+            if data.get("error"):
+                msg = data["error"].get("message") if isinstance(data["error"], dict) else str(data["error"])
+                raise OpenRouterError(f"OpenRouter returned an error: {msg}")
+            raise OpenRouterError("Unexpected response structure from OpenRouter chat")
+
+        message = choices[0].get("message") if isinstance(choices[0], dict) else {}
+        content = message.get("content") if isinstance(message, dict) else None
+
+        if isinstance(content, str):
+            return content.strip()
+        if isinstance(content, list):
+            parts = []
+            for item in content:
+                if isinstance(item, dict):
+                    text = item.get("text") or item.get("content")
+                    if isinstance(text, str):
+                        parts.append(text)
+                elif isinstance(item, str):
+                    parts.append(item)
+            if parts:
+                return "\n".join(parts).strip()
+
+        raise OpenRouterError("Unexpected response structure from OpenRouter chat")
 
     def __del__(self):
         try:

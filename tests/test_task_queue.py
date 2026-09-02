@@ -33,6 +33,43 @@ class TaskQueueTests(unittest.TestCase):
         self.assertEqual([item[1] for item in results], ["SECOND", "FIRST"])
         self.assertTrue(all(task.status == TaskStatus.COMPLETED for task in tasks))
 
+    def test_research_retries_when_evidence_is_insufficient(self):
+        agent = ResearchAgent(model="openrouter/free")
+        calls = []
+
+        def fake_web_tools(query):
+            calls.append(query)
+            if len(calls) == 1:
+                return []
+            return [
+                {"title": "Source 1", "url": "https://example.com/1", "snippet": "This is strong evidence about the research topic and the result is documented clearly."},
+                {"title": "Source 2", "url": "https://example.com/2", "snippet": "A second source confirms the same conclusion and includes supporting details."},
+            ]
+
+        agent._run_web_tools = fake_web_tools
+        agent.llm.generate = lambda prompt: "Final answer based on sufficient evidence."
+
+        response = agent.research("What is the impact of X on Y?")
+
+        self.assertEqual(len(calls), 2)
+        self.assertIn("Final answer", response)
+
+    def test_research_stops_when_no_new_sources_are_found(self):
+        agent = ResearchAgent(model="openrouter/free")
+        calls = []
+
+        def fake_web_tools(query):
+            calls.append(query)
+            return []
+
+        agent._run_web_tools = fake_web_tools
+        agent.ask = lambda query: "Fallback answer because no new sources were found."
+
+        response = agent.research("What is the impact of X on Y?", max_rounds=5, num_tasks=3)
+
+        self.assertEqual(len(calls), 2)
+        self.assertIn("Fallback answer", response)
+
 
 if __name__ == "__main__":
     unittest.main()
