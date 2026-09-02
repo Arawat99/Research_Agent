@@ -33,7 +33,7 @@ def _duckduckgo_html(query: str) -> str:
         return resp.text
 
 
-def web_search(query: str, max_results: int = 5) -> List[Dict[str, str]]:
+def web_search(query: str, max_results: int = 5) -> Dict:
     """Perform a web search using DuckDuckGo and return structured results.
 
     Parameters
@@ -44,18 +44,33 @@ def web_search(query: str, max_results: int = 5) -> List[Dict[str, str]]:
         Upper bound on the number of results to return.
     Returns
     -------
-    List[Dict[str, str]]
-        Each dictionary has ``title``, ``url`` and ``snippet`` keys.  ``snippet``
-        may be empty if the source page does not provide a short description.
+    Dict
+        Contains ``results`` (list of dicts with title/url/snippet), ``error`` (bool),
+        and ``error_reason`` (str) if search failed.
     """
     if not isinstance(query, str) or not query.strip():
         raise ValueError("query must be a non‑empty string")
 
     try:
         html = _duckduckgo_html(query)
-    except Exception:
-        # Network problems or unexpected HTML errors – return empty list.
-        return []
+    except httpx.ConnectError as e:
+        return {
+            "results": [],
+            "error": True,
+            "error_reason": f"Network connection failed. DuckDuckGo may be temporarily unreachable or blocking automated requests. Details: {str(e)}"
+        }
+    except httpx.TimeoutException as e:
+        return {
+            "results": [],
+            "error": True,
+            "error_reason": f"Search request timed out (10s timeout). The search engine is not responding quickly enough. Details: {str(e)}"
+        }
+    except Exception as e:
+        return {
+            "results": [],
+            "error": True,
+            "error_reason": f"Search failed due to an unexpected error: {type(e).__name__}: {str(e)}"
+        }
     soup = BeautifulSoup(html, "lxml")
     results: List[Dict[str, str]] = []
 
@@ -83,4 +98,15 @@ def web_search(query: str, max_results: int = 5) -> List[Dict[str, str]]:
         snippet = snippet_tag.get_text(strip=True) if snippet_tag else ""
         results.append({"title": title, "url": url, "snippet": snippet})
 
-    return results
+    if not results:
+        return {
+            "results": [],
+            "error": True,
+            "error_reason": f"No search results found for query: '{query}'. The search backend may not have indexed relevant content, or the results are not in a parseable format."
+        }
+    
+    return {
+        "results": results,
+        "error": False,
+        "error_reason": None
+    }
