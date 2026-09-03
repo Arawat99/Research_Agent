@@ -86,12 +86,20 @@ def _run_job(job: ResearchJob) -> None:
     job.publish("started", query=job.request.query)
     try:
         agent = ResearchAgent(model=job.request.model, provider=job.request.provider)
+        streamed_answer = []
+
+        def publish_update(update: dict[str, Any]) -> None:
+            if update.get("event") == "answer_delta":
+                streamed_answer.append(str(update.get("delta", "")))
+                job.answer = "".join(streamed_answer)
+            job.publish(**update)
+
         answer = agent.research(
             job.request.query,
             max_rounds=job.request.max_rounds,
             min_sources=job.request.min_sources,
             num_tasks=job.request.num_tasks,
-            progress_callback=lambda update: job.publish(**update),
+            progress_callback=publish_update,
         )
         job.answer = answer
         job.status = "completed"

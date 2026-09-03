@@ -17,6 +17,8 @@ endpoint is a thin wrapper around Ollama's ``/api/generate`` call while the
 from __future__ import annotations
 
 import os
+import json
+from collections.abc import Iterator
 from typing import List, Dict, Any
 
 import httpx
@@ -80,6 +82,22 @@ class OllamaLLM(LLMBase):
             return data["response"].strip()
         # Fallback – some versions return ``generated_text``
         return str(data.get("generated_text", "")).strip()
+
+    def generate_stream(self, prompt: str) -> Iterator[str]:
+        """Yield response chunks from Ollama's newline-delimited JSON stream."""
+        payload = {"model": self.model, "prompt": prompt, "stream": True}
+        try:
+            with self.client.stream("POST", "/api/generate", json=payload) as response:
+                response.raise_for_status()
+                for line in response.iter_lines():
+                    if not line:
+                        continue
+                    data = json.loads(line)
+                    chunk = data.get("response")
+                    if isinstance(chunk, str) and chunk:
+                        yield chunk
+        except Exception as exc:
+            raise OllamaError(f"Failed to stream from Ollama: {exc}") from exc
 
 
     def chat(self, messages: List[Dict[str, Any]]) -> str:

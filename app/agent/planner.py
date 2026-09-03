@@ -35,7 +35,10 @@ class ResearchPlanner:
             f"You are helping to plan a research project. Given the top‑level research "
             f"question below, generate exactly {num} concise sub‑questions or tasks that "
             f"together would allow a researcher to answer the original question. Return "
-            f"the tasks as a JSON array of strings and nothing else.\n\n"
+            f"the tasks as a JSON array of strings and nothing else. Each task must "
+            f"preserve the original topic, named entities, and intent. Do not switch "
+            f"to a generic language, programming, or unrelated topic. A task must be "
+            f"specific enough to search on its own.\n\n"
             f"Question:\n{question}\n"
         )
 

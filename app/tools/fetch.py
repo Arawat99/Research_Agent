@@ -6,6 +6,7 @@ instance containing the URL, title, domain and a cleaned text version of the pag
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 import httpx
@@ -52,7 +53,33 @@ def fetch_source(url: str, timeout: float = 10.0) -> Source:
     title_tag = soup.find("title")
     title = title_tag.get_text(strip=True) if title_tag and title_tag.get_text(strip=True) else url
     content = _extract_visible_text(html)[:20000]  # truncate to keep payload reasonable
-    domain = urlparse(url).netloc
+    parsed_url = urlparse(str(response.url))
+    domain = (parsed_url.hostname or urlparse(url).hostname or "").removeprefix("www.")
 
-    source = Source(url=url, title=title, domain=domain, content=content)
+    published_date = None
+    for selector in (
+        {"property": "article:published_time"},
+        {"property": "og:published_time"},
+        {"name": "datePublished"},
+        {"name": "pubdate"},
+        {"name": "date"},
+    ):
+        tag = soup.find("meta", attrs=selector)
+        if tag and tag.get("content"):
+            published_date = tag["content"].strip()
+            break
+
+    retrieved_date = datetime.now(timezone.utc)
+    snippet = content[:600] if content else None
+
+    source = Source(
+        url=response.url,
+        title=title,
+        domain=domain,
+        published_date=published_date,
+        snippet=snippet,
+        content=content,
+        retrieved_date=retrieved_date,
+        fetched_at=retrieved_date,
+    )
     return source

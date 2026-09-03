@@ -1,0 +1,3862 @@
+{
+  "nodes": [
+    {
+      "id": "app_llm_init",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "app/LLM/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_init_rationale_1",
+      "label": "Top‑level package for LLM abstractions. The public API consists of the…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base",
+      "label": "base.py",
+      "file_type": "code",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_llmbase",
+      "label": "LLMBase",
+      "file_type": "code",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L28",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_llmbase_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L39",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_llmbase_generate",
+      "label": ".generate()",
+      "file_type": "code",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L48",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_llmbase_chat",
+      "label": ".chat()",
+      "file_type": "code",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L60",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_py_any",
+      "label": "Any",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_llmbase_repr",
+      "label": ".__repr__()",
+      "file_type": "code",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L72",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_rationale_1",
+      "label": "Base abstraction for LLM providers. This module defines the abstract interface…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_rationale_29",
+      "label": "Abstract base class for LLM providers. Sub‑classes must implement two primary…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L29",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_rationale_40",
+      "label": "Create a new provider instance. Args: model: The identifier of the model to use…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L40",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_rationale_49",
+      "label": "Generate a completion for *prompt*. Args: prompt: The prompt text to send to…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L49",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_base_rationale_61",
+      "label": "Perform a chat completion. Args: messages: A list of message dictionaries with…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L61",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama",
+      "label": "ollama.py",
+      "file_type": "code",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_ollamaerror",
+      "label": "OllamaError",
+      "file_type": "code",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L27",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_py_runtimeerror",
+      "label": "RuntimeError",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_ollamallm",
+      "label": "OllamaLLM",
+      "file_type": "code",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L31",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_ollamallm_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L39",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_ollamallm_post",
+      "label": "._post()",
+      "file_type": "code",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_py_any",
+      "label": "Any",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_ollamallm_generate",
+      "label": ".generate()",
+      "file_type": "code",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L69",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_ollamallm_chat",
+      "label": ".chat()",
+      "file_type": "code",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L85",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_ollamallm_del",
+      "label": ".__del__()",
+      "file_type": "code",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L103",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_rationale_1",
+      "label": "Ollama provider implementation. This module implements :class:`OllamaLLM`, a…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_rationale_28",
+      "label": "Raised when communication with the Ollama server fails.",
+      "file_type": "rationale",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_rationale_32",
+      "label": "LLM provider that talks to an Ollama server. The default endpoint is…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L32",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_rationale_47",
+      "label": "Internal helper to POST *payload* to *path* and decode JSON. Errors from the…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L47",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_rationale_70",
+      "label": "Generate a completion for *prompt* using Ollama's ``/api/generate``. The…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L70",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_ollama_rationale_86",
+      "label": "Run a chat completion via Ollama's ``/api/chat`` endpoint. ``messages`` should…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L86",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter",
+      "label": "openrouter.py",
+      "file_type": "code",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_openroutererror",
+      "label": "OpenRouterError",
+      "file_type": "code",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L23",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_py_runtimeerror",
+      "label": "RuntimeError",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_openrouterllm",
+      "label": "OpenRouterLLM",
+      "file_type": "code",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L27",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_openrouterllm_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_py_any",
+      "label": "Any",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_openrouterllm_post",
+      "label": "._post()",
+      "file_type": "code",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_openrouterllm_generate",
+      "label": ".generate()",
+      "file_type": "code",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L73",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_openrouterllm_chat",
+      "label": ".chat()",
+      "file_type": "code",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L93",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_openrouterllm_del",
+      "label": ".__del__()",
+      "file_type": "code",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L108",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_rationale_1",
+      "label": "OpenRouter provider implementation. This module implements…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_rationale_24",
+      "label": "Raised when communication with the OpenRouter API fails.",
+      "file_type": "rationale",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_rationale_28",
+      "label": "LLM provider that talks to the OpenRouter API. The provider uses the standard…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_rationale_47",
+      "label": "POST *payload* to *path* and decode the JSON response. Errors are wrapped in…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L47",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_rationale_74",
+      "label": "Generate a completion using the chat endpoint with a single user message. The…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L74",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_openrouter_rationale_94",
+      "label": "Run a chat completion using the provided *messages* list.",
+      "file_type": "rationale",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L94",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_router",
+      "label": "router.py",
+      "file_type": "code",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_router_provider_factory",
+      "label": "_provider_factory()",
+      "file_type": "code",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_router_py_any",
+      "label": "Any",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_router_get_llm",
+      "label": "get_llm()",
+      "file_type": "code",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L91",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_router_rationale_1",
+      "label": "Router for selecting an LLM provider. The router inspects environment…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_router_rationale_38",
+      "label": "Return an instantiated provider based on *provider_name*. Args: provider_name:…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L38",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_llm_router_rationale_92",
+      "label": "Factory function that returns a concrete LLM instance. The function first…",
+      "file_type": "rationale",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L92",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_init",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "app/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_init",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "app/agent/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_init_rationale_1",
+      "label": "Agent package for the research‑agent project. Exports the primary…",
+      "file_type": "rationale",
+      "source_file": "app/agent/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_cli",
+      "label": "cli.py",
+      "file_type": "code",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "command",
+      "label": "command",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_cli_ask",
+      "label": "ask()",
+      "file_type": "code",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L25",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_cli_rationale_1",
+      "label": "Command‑line interface for the ResearchAgent. The CLI uses **Typer** to expose…",
+      "file_type": "rationale",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_cli_rationale_30",
+      "label": "Send *query* to the LLM and print the answer. The command simply constructs a…",
+      "file_type": "rationale",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L30",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner",
+      "label": "planner.py",
+      "file_type": "code",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_researchplanner",
+      "label": "ResearchPlanner",
+      "file_type": "code",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L19",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_researchplanner_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L26",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_researchplanner_plan_prompt",
+      "label": "._plan_prompt()",
+      "file_type": "code",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L30",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_researchplanner_parse_llm_output",
+      "label": "._parse_llm_output()",
+      "file_type": "code",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L40",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_researchplanner_create_plan",
+      "label": ".create_plan()",
+      "file_type": "code",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L65",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "uuid",
+      "label": "UUID",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_rationale_1",
+      "label": "Research planner – decomposes a high‑level research question into concrete…",
+      "file_type": "rationale",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_rationale_20",
+      "label": "Create a structured plan for a research question. The public method…",
+      "file_type": "rationale",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_rationale_31",
+      "label": "Construct a prompt that asks the LLM to output a JSON list of tasks.",
+      "file_type": "rationale",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L31",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_rationale_41",
+      "label": "Extract a list of task strings from the raw LLM output. The LLM may wrap the…",
+      "file_type": "rationale",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L41",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_planner_rationale_72",
+      "label": "Generate a list of :class:`ResearchTask` objects for *question*. Parameters…",
+      "file_type": "rationale",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L72",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_research_agent",
+      "label": "research_agent.py",
+      "file_type": "code",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_research_agent_researchagent",
+      "label": "ResearchAgent",
+      "file_type": "code",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L22",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_research_agent_researchagent_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_research_agent_researchagent_ask",
+      "label": ".ask()",
+      "file_type": "code",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L41",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_research_agent_rationale_1",
+      "label": "Minimal research agent. The ``ResearchAgent`` class provides the most…",
+      "file_type": "rationale",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_research_agent_rationale_23",
+      "label": "Simple research agent that forwards a query to an LLM. Parameters ----------…",
+      "file_type": "rationale",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_agent_research_agent_rationale_42",
+      "label": "Send *query* to the LLM and return its answer. The underlying LLM implements a…",
+      "file_type": "rationale",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L42",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_init",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_init_rationale_1",
+      "label": "Data models for the research‑agent application. The module re‑exports the…",
+      "file_type": "rationale",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_evidence",
+      "label": "evidence.py",
+      "file_type": "code",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_evidence_evidence",
+      "label": "Evidence",
+      "file_type": "code",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L10",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_evidence_py_basemodel",
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_evidence_py_validator",
+      "label": "validator",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_evidence_evidence_non_empty_support",
+      "label": ".non_empty_support()",
+      "file_type": "code",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_evidence_rationale_11",
+      "label": "Represents a piece of evidence supporting a claim in a research. Attributes…",
+      "file_type": "rationale",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_research",
+      "label": "research.py",
+      "file_type": "code",
+      "source_file": "app/models/research.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_research_researchstatus",
+      "label": "ResearchStatus",
+      "file_type": "code",
+      "source_file": "app/models/research.py",
+      "source_location": "L11",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_research_py_str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_research_py_enum",
+      "label": "Enum",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_research_research",
+      "label": "Research",
+      "file_type": "code",
+      "source_file": "app/models/research.py",
+      "source_location": "L18",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_research_py_basemodel",
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_research_rationale_19",
+      "label": "Top‑level research project model. Attributes ---------- id: UUID Unique…",
+      "file_type": "rationale",
+      "source_file": "app/models/research.py",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_source",
+      "label": "source.py",
+      "file_type": "code",
+      "source_file": "app/models/source.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_source_source",
+      "label": "Source",
+      "file_type": "code",
+      "source_file": "app/models/source.py",
+      "source_location": "L10",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_source_py_basemodel",
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_source_py_validator",
+      "label": "validator",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_source_source_title_non_empty",
+      "label": ".title_non_empty()",
+      "file_type": "code",
+      "source_file": "app/models/source.py",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_source_rationale_11",
+      "label": "A web or document source used during research. Attributes ---------- id: UUID…",
+      "file_type": "rationale",
+      "source_file": "app/models/source.py",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_task",
+      "label": "task.py",
+      "file_type": "code",
+      "source_file": "app/models/task.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_task_taskstatus",
+      "label": "TaskStatus",
+      "file_type": "code",
+      "source_file": "app/models/task.py",
+      "source_location": "L11",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_task_py_str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_task_py_enum",
+      "label": "Enum",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_task_prioritylevel",
+      "label": "PriorityLevel",
+      "file_type": "code",
+      "source_file": "app/models/task.py",
+      "source_location": "L18",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_task_researchtask",
+      "label": "ResearchTask",
+      "file_type": "code",
+      "source_file": "app/models/task.py",
+      "source_location": "L24",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_task_py_basemodel",
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_models_task_rationale_25",
+      "label": "A granular task belonging to a Research project. Attributes ---------- id: UUID…",
+      "file_type": "rationale",
+      "source_file": "app/models/task.py",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_init",
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "app/tools/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_init_rationale_1",
+      "label": "Utility tools for the research agent. This package provides functions for web…",
+      "file_type": "rationale",
+      "source_file": "app/tools/__init__.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_fetch",
+      "label": "fetch.py",
+      "file_type": "code",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_fetch_extract_visible_text",
+      "label": "_extract_visible_text()",
+      "file_type": "code",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_fetch_fetch_source",
+      "label": "fetch_source()",
+      "file_type": "code",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L32",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_fetch_rationale_1",
+      "label": "Source retrieval tool. Provides a function that downloads a web page and…",
+      "file_type": "rationale",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_fetch_rationale_18",
+      "label": "Return the visible text from *html*. Scripts, styles and other non‑content…",
+      "file_type": "rationale",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_fetch_rationale_33",
+      "label": "Retrieve *url* and return a populated :class:`Source` model. Parameters…",
+      "file_type": "rationale",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L33",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_search",
+      "label": "search.py",
+      "file_type": "code",
+      "source_file": "app/tools/search.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_search_duckduckgo_html",
+      "label": "_duckduckgo_html()",
+      "file_type": "code",
+      "source_file": "app/tools/search.py",
+      "source_location": "L20",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_search_web_search",
+      "label": "web_search()",
+      "file_type": "code",
+      "source_file": "app/tools/search.py",
+      "source_location": "L35",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_search_rationale_1",
+      "label": "Web search tool. Provides a simple DuckDuckGo HTML search implementation that…",
+      "file_type": "rationale",
+      "source_file": "app/tools/search.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_search_rationale_21",
+      "label": "Fetch DuckDuckGo *HTML* search results for *query*. The ``html.duckduckgo.com``…",
+      "file_type": "rationale",
+      "source_file": "app/tools/search.py",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_tools_search_rationale_36",
+      "label": "Perform a web search using DuckDuckGo and return structured results. Parameters…",
+      "file_type": "rationale",
+      "source_file": "app/tools/search.py",
+      "source_location": "L36",
+      "_origin": "ast"
+    },
+    {
+      "id": "research",
+      "label": "research",
+      "file_type": "code",
+      "source_file": "research",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "research_parse_args",
+      "label": "parse_args()",
+      "file_type": "code",
+      "source_file": "research",
+      "source_location": "L32",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "namespace",
+      "label": "Namespace",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "research_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "research",
+      "source_location": "L52",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "test_fallback",
+      "label": "test_fallback.py",
+      "file_type": "code",
+      "source_file": "test_fallback.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "app_llm_init",
+      "target": "app_llm_base",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/__init__.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_init",
+      "target": "app_llm_router",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/__init__.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_init_rationale_1",
+      "target": "app_llm_init",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base",
+      "target": "abc",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base",
+      "target": "app_llm_base_llmbase",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_llmbase",
+      "target": "app_llm_base_llmbase_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_llmbase",
+      "target": "app_llm_base_llmbase_generate",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_llmbase",
+      "target": "app_llm_base_llmbase_chat",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_llmbase_chat",
+      "target": "app_llm_base_py_any",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_llmbase",
+      "target": "app_llm_base_llmbase_repr",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_rationale_1",
+      "target": "app_llm_base",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_rationale_29",
+      "target": "app_llm_base_llmbase",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_rationale_40",
+      "target": "app_llm_base_llmbase_init",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_rationale_49",
+      "target": "app_llm_base_llmbase_generate",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_base_rationale_61",
+      "target": "app_llm_base_llmbase_chat",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/base.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama",
+      "target": "httpx",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama",
+      "target": "app_llm_base",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama",
+      "target": "app_llm_ollama_ollamaerror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamaerror",
+      "target": "app_llm_ollama_py_runtimeerror",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama",
+      "target": "app_llm_ollama_ollamallm",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm",
+      "target": "app_llm_base_llmbase",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm",
+      "target": "app_llm_ollama_ollamallm_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm",
+      "target": "app_llm_ollama_ollamallm_post",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm_post",
+      "target": "app_llm_ollama_py_any",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm_post",
+      "target": "app_llm_ollama_py_any",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm",
+      "target": "app_llm_ollama_ollamallm_generate",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm",
+      "target": "app_llm_ollama_ollamallm_chat",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm_chat",
+      "target": "app_llm_ollama_py_any",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm",
+      "target": "app_llm_ollama_ollamallm_del",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm_post",
+      "target": "app_llm_ollama_ollamaerror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm_generate",
+      "target": "app_llm_ollama_ollamallm_post",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm_chat",
+      "target": "app_llm_ollama_ollamallm_post",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_rationale_1",
+      "target": "app_llm_ollama",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_rationale_28",
+      "target": "app_llm_ollama_ollamaerror",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_rationale_32",
+      "target": "app_llm_ollama_ollamallm",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_rationale_47",
+      "target": "app_llm_ollama_ollamallm_post",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_rationale_70",
+      "target": "app_llm_ollama_ollamallm_generate",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_rationale_86",
+      "target": "app_llm_ollama_ollamallm_chat",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter",
+      "target": "httpx",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter",
+      "target": "app_llm_base",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter",
+      "target": "app_llm_openrouter_openroutererror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openroutererror",
+      "target": "app_llm_openrouter_py_runtimeerror",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter",
+      "target": "app_llm_openrouter_openrouterllm",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm",
+      "target": "app_llm_base_llmbase",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm",
+      "target": "app_llm_openrouter_openrouterllm_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_init",
+      "target": "app_llm_openrouter_py_any",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm",
+      "target": "app_llm_openrouter_openrouterllm_post",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_post",
+      "target": "app_llm_openrouter_py_any",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_post",
+      "target": "app_llm_openrouter_py_any",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm",
+      "target": "app_llm_openrouter_openrouterllm_generate",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm",
+      "target": "app_llm_openrouter_openrouterllm_chat",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_chat",
+      "target": "app_llm_openrouter_py_any",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm",
+      "target": "app_llm_openrouter_openrouterllm_del",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_init",
+      "target": "app_llm_openrouter_openroutererror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_post",
+      "target": "app_llm_openrouter_openroutererror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_generate",
+      "target": "app_llm_openrouter_openrouterllm_post",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_generate",
+      "target": "app_llm_openrouter_openroutererror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_chat",
+      "target": "app_llm_openrouter_openrouterllm_post",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm_chat",
+      "target": "app_llm_openrouter_openroutererror",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L106",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_rationale_1",
+      "target": "app_llm_openrouter",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_rationale_24",
+      "target": "app_llm_openrouter_openroutererror",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_rationale_28",
+      "target": "app_llm_openrouter_openrouterllm",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_rationale_47",
+      "target": "app_llm_openrouter_openrouterllm_post",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_rationale_74",
+      "target": "app_llm_openrouter_openrouterllm_generate",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_rationale_94",
+      "target": "app_llm_openrouter_openrouterllm_chat",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "app_llm_base",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "app_llm_ollama",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "app_llm_openrouter",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "app_llm_router_provider_factory",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_provider_factory",
+      "target": "app_llm_router_py_any",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_provider_factory",
+      "target": "app_llm_router_py_any",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "app_llm_router_get_llm",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_get_llm",
+      "target": "app_llm_router_py_any",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_get_llm",
+      "target": "app_llm_router_py_any",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_get_llm",
+      "target": "app_llm_router_provider_factory",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_rationale_1",
+      "target": "app_llm_router",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_rationale_38",
+      "target": "app_llm_router_provider_factory",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_rationale_92",
+      "target": "app_llm_router_get_llm",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_init",
+      "target": "app_agent_planner",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/__init__.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_init",
+      "target": "app_agent_research_agent",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/__init__.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_init_rationale_1",
+      "target": "app_agent_init",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_cli",
+      "target": "typer",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_cli",
+      "target": "app_agent_research_agent",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_cli_ask",
+      "target": "command",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_cli",
+      "target": "app_agent_cli_ask",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_cli_rationale_1",
+      "target": "app_agent_cli",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_cli_rationale_30",
+      "target": "app_agent_cli_ask",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "uuid",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "app_models_task",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "app_llm",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "app_agent_planner_researchplanner",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner",
+      "target": "app_agent_planner_researchplanner_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner",
+      "target": "app_agent_planner_researchplanner_plan_prompt",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner",
+      "target": "app_agent_planner_researchplanner_parse_llm_output",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner",
+      "target": "app_agent_planner_researchplanner_create_plan",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner_create_plan",
+      "target": "uuid",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner_create_plan",
+      "target": "app_models_task_prioritylevel",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner_create_plan",
+      "target": "app_models_task_researchtask",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner_create_plan",
+      "target": "app_agent_planner_researchplanner_plan_prompt",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner_create_plan",
+      "target": "app_agent_planner_researchplanner_parse_llm_output",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner_create_plan",
+      "target": "app_models_task_researchtask",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L106",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_rationale_1",
+      "target": "app_agent_planner",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_rationale_20",
+      "target": "app_agent_planner_researchplanner",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_rationale_31",
+      "target": "app_agent_planner_researchplanner_plan_prompt",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_rationale_41",
+      "target": "app_agent_planner_researchplanner_parse_llm_output",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_rationale_72",
+      "target": "app_agent_planner_researchplanner_create_plan",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent",
+      "target": "app_llm",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent",
+      "target": "app_agent_research_agent_researchagent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent_researchagent",
+      "target": "app_agent_research_agent_researchagent_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent_researchagent",
+      "target": "app_agent_research_agent_researchagent_ask",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent_rationale_1",
+      "target": "app_agent_research_agent",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent_rationale_23",
+      "target": "app_agent_research_agent_researchagent",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent_rationale_42",
+      "target": "app_agent_research_agent_researchagent_ask",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_evidence",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_research",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_source",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_task",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init_rationale_1",
+      "target": "app_models_init",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_evidence",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_evidence",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_evidence",
+      "target": "uuid",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_evidence",
+      "target": "pydantic",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_evidence",
+      "target": "app_models_evidence_evidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_evidence_evidence",
+      "target": "app_models_evidence_py_basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_evidence_evidence_non_empty_support",
+      "target": "app_models_evidence_py_validator",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_evidence_evidence",
+      "target": "app_models_evidence_evidence_non_empty_support",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_evidence_rationale_11",
+      "target": "app_models_evidence_evidence",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/evidence.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research",
+      "target": "app_models_research_py_enum",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research",
+      "target": "uuid",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research",
+      "target": "pydantic",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research",
+      "target": "app_models_research_researchstatus",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research_researchstatus",
+      "target": "app_models_research_py_str",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research_researchstatus",
+      "target": "app_models_research_py_enum",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research",
+      "target": "app_models_research_research",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research_research",
+      "target": "app_models_research_py_basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_research_rationale_19",
+      "target": "app_models_research_research",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/research.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_source",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/source.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_source",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/source.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_source",
+      "target": "uuid",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/source.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_source",
+      "target": "pydantic",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/source.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_source",
+      "target": "app_models_source_source",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/source.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_source_source",
+      "target": "app_models_source_py_basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/source.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_source_source_title_non_empty",
+      "target": "app_models_source_py_validator",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/source.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_source_source",
+      "target": "app_models_source_source_title_non_empty",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/source.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_source_rationale_11",
+      "target": "app_models_source_source",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/source.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task",
+      "target": "app_models_task_py_enum",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task",
+      "target": "uuid",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task",
+      "target": "pydantic",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task",
+      "target": "app_models_task_taskstatus",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task_taskstatus",
+      "target": "app_models_task_py_str",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task_taskstatus",
+      "target": "app_models_task_py_enum",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task",
+      "target": "app_models_task_prioritylevel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task_prioritylevel",
+      "target": "int",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task_prioritylevel",
+      "target": "app_models_task_py_enum",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task",
+      "target": "app_models_task_researchtask",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task_researchtask",
+      "target": "app_models_task_py_basemodel",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_task_rationale_25",
+      "target": "app_models_task_researchtask",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/task.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_init",
+      "target": "app_tools_search",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/__init__.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_init",
+      "target": "app_tools_fetch",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/__init__.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_init_rationale_1",
+      "target": "app_tools_init",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch",
+      "target": "urllib_parse",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch",
+      "target": "httpx",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch",
+      "target": "bs4",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch",
+      "target": "app_models_source",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch",
+      "target": "app_tools_fetch_extract_visible_text",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch",
+      "target": "app_tools_fetch_fetch_source",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch_fetch_source",
+      "target": "app_models_source_source",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch_fetch_source",
+      "target": "app_tools_fetch_extract_visible_text",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch_fetch_source",
+      "target": "app_models_source_source",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch_rationale_1",
+      "target": "app_tools_fetch",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch_rationale_18",
+      "target": "app_tools_fetch_extract_visible_text",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch_rationale_33",
+      "target": "app_tools_fetch_fetch_source",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search",
+      "target": "urllib_parse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search",
+      "target": "httpx",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search",
+      "target": "bs4",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search",
+      "target": "app_tools_search_duckduckgo_html",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search",
+      "target": "app_tools_search_web_search",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search_web_search",
+      "target": "app_tools_search_duckduckgo_html",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search_rationale_1",
+      "target": "app_tools_search",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search_rationale_21",
+      "target": "app_tools_search_duckduckgo_html",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_search_rationale_36",
+      "target": "app_tools_search_web_search",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/search.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "research",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "research",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "research",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "research",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "research",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "research",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "research",
+      "target": "app_agent_research_agent",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "research",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "research",
+      "target": "research_parse_args",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "research",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "research_parse_args",
+      "target": "namespace",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "research",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "research",
+      "target": "research_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "research",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "research_main",
+      "target": "research_parse_args",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "research",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "test_fallback",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_fallback.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "test_fallback",
+      "target": "dotenv",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_fallback.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "test_fallback",
+      "target": "app_llm",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_fallback.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_init",
+      "target": "app_llm_base",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/__init__.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_init",
+      "target": "app_llm_router",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/__init__.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_init",
+      "target": "app_agent_planner",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/__init__.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_init",
+      "target": "app_agent_research_agent",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/__init__.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_evidence",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_research",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_source",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_task",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_init",
+      "target": "app_tools_search",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/__init__.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_init",
+      "target": "app_tools_fetch",
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/__init__.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_init",
+      "target": "app_llm_base_llmbase",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/__init__.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_init",
+      "target": "app_llm_router_get_llm",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/__init__.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama",
+      "target": "app_llm_base_llmbase",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter",
+      "target": "app_llm_base_llmbase",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "app_llm_base_llmbase",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "app_llm_ollama_ollamallm",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router",
+      "target": "app_llm_openrouter_openrouterllm",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_init",
+      "target": "app_agent_planner_researchplanner",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/__init__.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_init",
+      "target": "app_agent_research_agent_researchagent",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/__init__.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_cli",
+      "target": "app_agent_research_agent_researchagent",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/cli.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "app_models_task_researchtask",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "app_models_task_prioritylevel",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "app_models_task_taskstatus",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner",
+      "target": "app_llm_router_get_llm",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/planner.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent",
+      "target": "app_llm_router_get_llm",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_evidence_evidence",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_research_research",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_research_researchstatus",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_source_source",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_task_researchtask",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_task_taskstatus",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_models_init",
+      "target": "app_models_task_prioritylevel",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/__init__.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_init",
+      "target": "app_tools_search_web_search",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/__init__.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_init",
+      "target": "app_tools_fetch_fetch_source",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/__init__.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch",
+      "target": "app_models_source_source",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "test_fallback",
+      "target": "app_llm_router_get_llm",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_fallback.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_provider_factory",
+      "target": "app_llm_ollama_ollamallm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_provider_factory",
+      "target": "app_llm_openrouter_openrouterllm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/LLM/router.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch_fetch_source",
+      "target": "app_models_source_source",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_ollama_ollamallm",
+      "target": "app_llm_base_llmbase",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/LLM/ollama.py",
+      "source_location": "L31",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_openrouter_openrouterllm",
+      "target": "app_llm_base_llmbase",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/LLM/openrouter.py",
+      "source_location": "L27",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_provider_factory",
+      "target": "app_llm_base_llmbase",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/LLM/router.py",
+      "source_location": "L53",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_provider_factory",
+      "target": "app_llm_ollama_ollamallm",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/LLM/router.py",
+      "source_location": "L47",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_llm_router_provider_factory",
+      "target": "app_llm_openrouter_openrouterllm",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/LLM/router.py",
+      "source_location": "L49",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_cli_ask",
+      "target": "app_agent_research_agent_researchagent",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/agent/cli.py",
+      "source_location": "L35",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner",
+      "target": "app_models_task_researchtask",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/agent/planner.py",
+      "source_location": "L71",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner",
+      "target": "app_models_task_prioritylevel",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/agent/planner.py",
+      "source_location": "L70",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner",
+      "target": "app_models_task_taskstatus",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/agent/planner.py",
+      "source_location": "L110",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_tools_fetch_fetch_source",
+      "target": "app_models_source_source",
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "app/tools/fetch.py",
+      "source_location": "L32",
+      "weight": 0.8,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_planner_researchplanner_init",
+      "target": "app_llm_router_get_llm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/agent/planner.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "app_agent_research_agent_researchagent_init",
+      "target": "app_llm_router_get_llm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/agent/research_agent.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "research_main",
+      "target": "app_agent_research_agent_researchagent",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "research",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "failed_sources": [
+    "/home/chrisjoshua/Personal AI Assistant/projects/research agent/pyproject.toml"
+  ]
+}

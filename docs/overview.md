@@ -34,6 +34,9 @@ This prevents the agent from running every research sub-question at once and mak
 | `app/tools/fetch.py` | Fetches and normalizes source content from result URLs. |
 | `app/models` | Pydantic models for research state, evidence, tasks, and sources. |
 | `app/agent/cli.py` | Typer-based command-line interface for interactive use. |
+| `server/main.py` | FastAPI job API with background research execution and progress SSE. |
+| `server/combined.py` | Single ASGI entrypoint mounting the Gradio UI and FastAPI API together. |
+| `frontend` | Gradio interface for starting research and displaying streamed answers and clickable sources. |
 
 ## Research loop behavior
 
@@ -43,6 +46,18 @@ The current loop includes two important safeguards:
 - It exits the loop when the agent stops finding new evidence, preventing an endless retry cycle.
 
 This means the system behaves more like a controlled research process than a raw chatbot.
+
+## Source-aware synthesis
+
+The fetch layer preserves structured metadata alongside page text: title, URL,
+domain, publication date, retrieval date, snippet, and content. The research
+agent includes these fields in the synthesis prompt, allowing the LLM to weigh
+source authority and recency instead of seeing an unlabeled block of webpage
+text.
+
+For frontend users, the answer is rendered as Markdown so headings, tables,
+lists, and fenced code remain readable. Source URLs from completed research
+tasks are displayed as clickable links.
 
 ## Provider strategy
 

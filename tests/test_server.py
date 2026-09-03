@@ -12,6 +12,11 @@ class ServerTests(unittest.TestCase):
         def fake_research(query, **kwargs):
             kwargs["progress_callback"]({"event": "planned", "total_tasks": 1})
             kwargs["progress_callback"]({"event": "task_started", "task_id": "task-1"})
+            kwargs["progress_callback"]({
+                "event": "task_completed",
+                "sources_found": 1,
+                "sources": [{"title": "Example", "url": "https://example.com"}],
+            })
             return "answer"
 
         agent.research.side_effect = fake_research
@@ -23,8 +28,9 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(job.answer, "answer")
         self.assertEqual(
             [event["event"] for event in job.events],
-            ["started", "planned", "task_started", "completed"],
+            ["started", "planned", "task_started", "task_completed", "completed"],
         )
+        self.assertEqual(job.events[3]["sources"][0]["url"], "https://example.com")
 
     def test_event_stream_replays_events_until_completion(self):
         job = ResearchJob(ResearchRequest(query="Explain this"))

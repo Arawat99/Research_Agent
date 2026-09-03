@@ -1,0 +1,21 @@
+{
+  "0": "research_agent.py",
+  "1": "LLMBase",
+  "2": "ResearchAgent",
+  "3": "Features",
+  "4": "OpenRouterLLM",
+  "5": "Research Workflow",
+  "6": "README.md",
+  "8": "main.py",
+  "9": "app/__init__.py",
+  "10": "frontend/research.py",
+  "11": "Usage Guide",
+  "12": "load_prompts",
+  "13": "API Reference",
+  "14": "Overview",
+  "15": "Documentation for the Research Agent",
+  "16": "research",
+  "17": "server/__init__.py",
+  "18": "models/__init__.py",
+  "19": "frontend/__init__.py"
+}

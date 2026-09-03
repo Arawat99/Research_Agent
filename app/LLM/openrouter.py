@@ -12,7 +12,9 @@ layer are wrapped in :class:`OpenRouterError` for a stable exception type.
 
 from __future__ import annotations
 
+import json
 import os
+from collections.abc import Iterator
 from typing import List, Dict, Any
 
 import httpx
@@ -122,6 +124,33 @@ class OpenRouterLLM(LLMBase):
             raise OpenRouterError(f"OpenRouter returned an error: {msg}")
 
         raise OpenRouterError("Unexpected response structure from OpenRouter")
+
+    def generate_stream(self, prompt: str) -> Iterator[str]:
+        """Yield answer text chunks from OpenRouter's SSE completion stream."""
+        payload = {
+            "model": self.model,
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 512,
+            "stream": True,
+        }
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://openrouter.ai",
+            "X-Title": "Claude Research Agent",
+        }
+        try:
+            with self.client.stream("POST", "chat/completions", json=payload, headers=headers) as response:
+                response.raise_for_status()
+                for line in response.iter_lines():
+                    if not line or line == "data: [DONE]":
+                        continue
+                    data = json.loads(line.removeprefix("data: ").strip())
+                    delta = ((data.get("choices") or [{}])[0].get("delta") or {}).get("content")
+                    if isinstance(delta, str) and delta:
+                        yield delta
+        except Exception as exc:
+            raise OpenRouterError(f"Failed OpenRouter streaming request: {exc}") from exc
 
     def chat(self, messages: List[Dict[str, Any]]) -> str:
         """Run a chat completion using the provided *messages* list.

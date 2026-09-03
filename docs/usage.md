@@ -21,6 +21,10 @@ print(answer)
 
 The agent will attempt lightweight web grounding for research-style prompts and pass the retrieved sources into the LLM prompt when they are available.
 
+Fetched sources include title, URL, domain, publication date when available,
+retrieval date, snippet, and page content. The final prompt includes this
+metadata so the model can prefer recent and authoritative evidence.
+
 ## Run the iterative research loop
 
 The current agent supports a queue-driven research method that plans subtasks and gathers evidence until enough sources exist:
@@ -36,6 +40,18 @@ answer = agent.research(
     num_tasks=3,
 )
 print(answer)
+```
+
+To observe progress while the research loop runs, provide a callback:
+
+```python
+def on_progress(event):
+    print(event["event"], event)
+
+answer = agent.research(
+    "What is the impact of AI on software engineering teams?",
+    progress_callback=on_progress,
+)
 ```
 
 This is the recommended path for multi-step research because it uses a task queue rather than injecting a single raw prompt into the model.
@@ -94,6 +110,37 @@ This avoids endless retries while still allowing the agent to continue searching
 source venv/bin/activate
 python -m unittest discover -s tests -q
 ```
+
+## Run the HTTP API and Gradio UI
+
+For separate local processes:
+
+```bash
+python -m server.main
+python frontend/app.py
+```
+
+For one local process serving both the API and frontend:
+
+```bash
+uvicorn server.combined:app --host 0.0.0.0 --port 5000
+```
+
+Open `http://127.0.0.1:5000`. The combined service exposes the Gradio UI at
+`/`, JSON job snapshots at `/research/{id}`, and progress SSE at
+`/research/{id}/stream`.
+
+## Deploy as one Render service
+
+Use the repository root as the service directory:
+
+```text
+Build command: pip install -r requirements.txt
+Start command: uvicorn server.combined:app --host 0.0.0.0 --port $PORT
+```
+
+Set LLM credentials as Render environment secrets. The combined app uses the
+Render-provided port for both the frontend and backend.
 
 ---
 

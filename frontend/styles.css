@@ -1,0 +1,916 @@
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+:root {
+    --bg: #060d1b;
+    --bg-soft: #0a1324;
+    --panel: #0d1729;
+    --panel-hover: #111e34;
+    --border: #1d2b43;
+
+    --text: #f5f7fb;
+    --text-soft: #c5cfdf;
+    --muted: #7f8da6;
+
+    --accent: #7654f6;
+    --accent-light: #987cff;
+
+    --green: #55d99a;
+    --red: #ff6b7a;
+    --blue: #66a4ff;
+}
+
+
+/* =========================================================
+   GRADIO THEME OVERRIDE
+   Gradio's Base theme ships its own light-mode CSS variables
+   and wraps grouped inputs (Settings sliders, the Answer
+   textbox) in internal .form/.block containers that carry
+   that light background. Our custom classes only styled the
+   <input>/<textarea> tags themselves, so the light-theme text
+   colors above ended up sitting on a white wrapper instead of
+   var(--panel) — that's the washed-out "Model" field and the
+   low-contrast settings labels in the screenshot. This block
+   neutralizes the leak at the source.
+   ========================================================= */
+
+.gradio-container {
+    --body-text-color: var(--text) !important;
+    --body-text-color-subdued: var(--muted) !important;
+    --background-fill-primary: transparent !important;
+    --background-fill-secondary: var(--panel) !important;
+    --border-color-primary: var(--border) !important;
+    --block-background-fill: transparent !important;
+    --block-border-color: var(--border) !important;
+    --block-label-background-fill: transparent !important;
+    --block-label-text-color: var(--muted) !important;
+    --block-title-text-color: var(--text) !important;
+    --input-background-fill: #0a1424 !important;
+    --input-background-fill-focus: #0a1424 !important;
+    --input-border-color: var(--border) !important;
+    --input-placeholder-color: #687791 !important;
+    --slider-color: var(--accent) !important;
+    --neutral-50: #0a1424 !important;
+    --neutral-100: #101c30 !important;
+    --neutral-200: #1d2b43 !important;
+    --neutral-700: var(--text-soft) !important;
+    --neutral-800: var(--text) !important;
+}
+
+
+body {
+    margin: 0 !important;
+    background: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+
+.gradio-container {
+    max-width: none !important;
+    min-height: 100vh !important;
+    padding: 0 !important;
+    background:
+        radial-gradient(
+            circle at 70% -15%,
+            #182747 0%,
+            #091426 38%,
+            #060d1b 75%
+        ) !important;
+}
+
+
+/* =========================================================
+   APPLICATION SHELL
+   ========================================================= */
+
+.app-shell {
+    min-height: 100vh;
+    width: 100%;
+}
+
+
+.sidebar {
+    box-sizing: border-box !important;
+    min-width: 235px !important;
+    max-width: 235px !important;
+
+    padding: 28px 18px !important;
+
+    background: rgba(6, 15, 30, 0.92) !important;
+    border-right: 1px solid var(--border) !important;
+}
+
+
+.main-content {
+    box-sizing: border-box !important;
+
+    width: 100% !important;
+    max-width: 1280px !important;
+
+    margin: 0 auto !important;
+    padding: 42px 44px 60px !important;
+}
+
+
+/* =========================================================
+   BRAND / SIDEBAR
+   ========================================================= */
+
+.brand {
+    padding: 2px 8px 32px;
+}
+
+
+.brand-title {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+
+.brand-subtitle {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--muted);
+    font-size: 11px;
+}
+
+
+.sidebar-button {
+    width: 100% !important;
+
+    border: 0 !important;
+    border-radius: 7px !important;
+
+    background: rgba(118, 84, 246, 0.12) !important;
+    color: #c7baff !important;
+
+    text-align: left !important;
+}
+
+
+.sidebar-button:hover {
+    background: rgba(118, 84, 246, 0.22) !important;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.eyebrow {
+    margin-bottom: 7px;
+
+    color: var(--accent-light);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+
+.page-title {
+    margin: 0 !important;
+
+    color: white !important;
+
+    font-size: 28px !important;
+    font-weight: 700 !important;
+
+    letter-spacing: -0.03em;
+}
+
+
+.page-description {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   QUESTION INPUT
+   ========================================================= */
+
+.question-container {
+    margin-top: 28px;
+
+    padding: 6px !important;
+
+    border: 1px solid #31415e !important;
+    border-radius: 10px !important;
+
+    background: #0b1526 !important;
+}
+
+
+.question-container:focus-within {
+    border-color: #6e58c9 !important;
+
+    box-shadow:
+        0 0 0 2px rgba(118, 84, 246, 0.12) !important;
+}
+
+
+.question-input textarea {
+    min-height: 46px !important;
+
+    padding: 11px 13px !important;
+
+    border: 0 !important;
+    outline: none !important;
+
+    background: transparent !important;
+
+    color: white !important;
+
+    font-size: 14px !important;
+}
+
+
+.question-input textarea::placeholder {
+    color: #687791 !important;
+}
+
+
+.start-button {
+    min-width: 155px !important;
+
+    margin: 0 !important;
+
+    border: 0 !important;
+    border-radius: 7px !important;
+
+    background: linear-gradient(
+        135deg,
+        #805cf5,
+        #5d40c9
+    ) !important;
+
+    color: white !important;
+
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+
+.start-button:hover {
+    background: linear-gradient(
+        135deg,
+        #8d6afa,
+        #674bd3
+    ) !important;
+}
+
+
+.hint {
+    margin-top: 8px;
+
+    color: #687791;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   WORKSPACE
+   ========================================================= */
+
+.workspace {
+    margin-top: 24px !important;
+}
+
+
+.research-column {
+    min-width: 0 !important;
+}
+
+
+.right-column {
+    min-width: 270px !important;
+    max-width: 300px !important;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.panel {
+    box-sizing: border-box !important;
+
+    margin-bottom: 16px !important;
+    padding: 18px !important;
+
+    border: 1px solid var(--border) !important;
+    border-radius: 10px !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16, 28, 48, 0.96),
+            rgba(10, 20, 35, 0.96)
+        ) !important;
+}
+
+
+.panel-header {
+    margin-bottom: 15px !important;
+}
+
+
+.panel-title {
+    margin: 0 !important;
+
+    color: white !important;
+
+    font-size: 13px !important;
+    font-weight: 650 !important;
+}
+
+
+.panel-subtitle {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    padding: 5px 9px !important;
+
+    border: 1px solid rgba(118, 84, 246, 0.28) !important;
+    border-radius: 999px !important;
+
+    background: rgba(118, 84, 246, 0.09) !important;
+
+    color: #a990ff !important;
+
+    font-size: 10px !important;
+    font-weight: 600 !important;
+
+    text-align: center !important;
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.progress-container {
+    min-height: 185px;
+
+    max-height: 330px;
+
+    overflow-y: auto;
+
+    padding-right: 4px;
+}
+
+
+.progress-item {
+    display: flex;
+
+    gap: 12px;
+
+    padding: 11px 4px;
+
+    border-bottom: 1px solid rgba(36, 49, 73, 0.65);
+}
+
+
+.progress-item:last-child {
+    border-bottom: 0;
+}
+
+
+.progress-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #16243a;
+
+    color: var(--blue);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.progress-completed .progress-icon {
+    background: rgba(85, 217, 154, 0.10);
+    color: var(--green);
+}
+
+
+.progress-content {
+    min-width: 0;
+}
+
+
+.progress-title {
+    color: #e9eef7;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+.progress-description {
+    margin-top: 3px;
+
+    overflow: hidden;
+
+    color: #8190a8;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    text-overflow: ellipsis;
+}
+
+
+.event-meta {
+    margin-left: 8px;
+
+    color: #60718c;
+}
+
+
+.progress-empty,
+.source-empty {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 150px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+.progress-empty strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--text-soft);
+
+    font-size: 11px;
+}
+
+
+.progress-empty span {
+    display: block;
+
+    color: var(--muted);
+}
+
+
+.empty-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 8px;
+
+    background: #152238;
+
+    color: #8195b4;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   ANSWER
+   ========================================================= */
+
+.answer-panel {
+    min-height: 380px;
+}
+
+/* Neutralize Gradio's internal block wrapper around the
+   Textbox so var(--panel)'s dark gradient (set on this same
+   Column) actually shows behind the text instead of Gradio's
+   default light block background. */
+.answer-panel .block {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+.answer-box {
+    min-height: 300px !important;
+    max-height: 500px !important;
+
+    padding: 4px 2px !important;
+
+    background: transparent !important;
+
+    color: #d9e1ef !important;
+
+    font-size: 13px !important;
+    line-height: 1.7 !important;
+
+    overflow-y: auto;
+}
+
+
+.answer-box h1,
+.answer-box h2,
+.answer-box h3,
+.answer-box h4 {
+    margin: 0 0 12px;
+    color: #f5f7fb;
+}
+
+
+.answer-box p {
+    margin: 0 0 14px;
+}
+
+
+.answer-box pre {
+    margin: 16px 0;
+    border: 1px solid #263752;
+    border-radius: 8px;
+    background: #08111f;
+    overflow: hidden;
+}
+
+
+.answer-box code {
+    padding: 2px 5px;
+    border-radius: 4px;
+    background: #08111f;
+    color: #dce9ff;
+    font-family: "DejaVu Sans Mono", monospace;
+    font-size: 12px;
+}
+
+
+.answer-box pre code {
+    display: block;
+    padding: 12px;
+    border-radius: 0;
+    overflow-x: auto;
+    line-height: 1.6;
+}
+
+
+.footer-note {
+    margin-top: 8px;
+
+    color: #62718a;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   SOURCES
+   ========================================================= */
+
+.source-total {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.source-total-number {
+    color: white;
+
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+.source-total strong {
+    display: block;
+
+    color: #dce4f2;
+
+    font-size: 11px;
+}
+
+
+.source-total span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+.source-row {
+    display: grid;
+
+    grid-template-columns: 8px 1fr auto;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 0;
+
+    border-bottom: 1px solid rgba(36, 49, 73, 0.45);
+}
+
+
+.source-dot {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: var(--blue);
+}
+
+
+.source-link {
+    overflow: hidden;
+
+    color: #aab7ca !important;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    text-decoration: none;
+    text-overflow: ellipsis;
+}
+
+
+.source-link:hover {
+    color: #8fb8ff !important;
+    text-decoration: underline;
+}
+
+
+.source-empty {
+    min-height: 110px;
+}
+
+
+.source-empty-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+
+    background: #152238;
+
+    color: #7790b5;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+.settings .gradio-container {
+    background: transparent !important;
+}
+
+/* Same wrapper-leak fix as the Answer panel: the grouped
+   Textbox + Sliders get wrapped in Gradio's own .form
+   container, which was rendering with a default light
+   background — that's the white box behind "Research
+   Settings" in the screenshot, and why the light-colored
+   label/input text below was unreadable. */
+.settings .form,
+.settings .block {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+.settings input {
+    color: #dbe4f3 !important;
+}
+
+
+.settings label {
+    color: #8796ad !important;
+
+    font-size: 10px !important;
+}
+
+
+.settings input,
+.settings textarea {
+    background: #0a1424 !important;
+
+    border-color: #1d2b43 !important;
+
+    font-size: 11px !important;
+}
+
+
+.settings input:focus {
+    border-color: #6651b8 !important;
+}
+
+
+.settings .wrap {
+    background: transparent !important;
+}
+
+
+.settings .slider-container {
+    margin-top: 2px !important;
+}
+
+
+.settings input[type="range"] {
+    accent-color: var(--accent) !important;
+    background: transparent !important;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.error-message {
+    margin-top: 10px;
+
+    padding: 10px 12px;
+
+    border: 1px solid rgba(255, 107, 122, 0.25);
+
+    border-radius: 7px;
+
+    background: rgba(255, 107, 122, 0.07);
+
+    color: #ff8995;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   SCROLLBARS
+   ========================================================= */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #263752 transparent;
+}
+
+
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+*::-webkit-scrollbar-thumb {
+    background: #263752;
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .main-content {
+        padding: 32px 28px 50px !important;
+    }
+
+    .right-column {
+        min-width: 240px !important;
+        max-width: 250px !important;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .app-shell {
+        flex-direction: column !important;
+    }
+
+
+    .sidebar {
+        display: none !important;
+    }
+
+
+    .main-content {
+        max-width: none !important;
+
+        padding: 28px 18px 45px !important;
+    }
+
+
+    .workspace {
+        flex-direction: column !important;
+    }
+
+
+    .right-column {
+        min-width: 100% !important;
+        max-width: none !important;
+    }
+
+
+    .question-container {
+        flex-direction: column !important;
+    }
+
+
+    .start-button {
+        width: 100% !important;
+        min-width: 0 !important;
+
+        min-height: 42px !important;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .main-content {
+        padding: 22px 12px 35px !important;
+    }
+
+
+    .page-title {
+        font-size: 24px !important;
+    }
+
+
+    .panel {
+        padding: 14px !important;
+    }
+
+
+    .answer-box {
+        min-height: 260px !important;
+    }
+
+}

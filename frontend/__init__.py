@@ -1,0 +1,1 @@
+"""Gradio frontend for the research agent."""

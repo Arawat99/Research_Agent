@@ -887,3 +887,35 @@ The server listens on `http://127.0.0.1:8000`. Start a research job with
 an `EventSource` to `GET /research/{id}/stream` for task progress and the
 terminal `completed` or `failed` event. The existing CLI remains available
 through `python -m app.agent.cli`.
+
+## Gradio frontend
+
+Run the API and frontend in separate terminals:
+
+```bash
+python -m server.main
+python frontend/app.py
+```
+
+The frontend defaults to `http://127.0.0.1:8000`. Set `RESEARCH_API_URL` when
+the API is deployed separately.
+
+## Render single service
+
+FastAPI and Gradio can run in one Render Web Service through the combined ASGI
+app. Configure the service with:
+
+```text
+Build command: pip install -r requirements.txt
+Start command: uvicorn server.combined:app --host 0.0.0.0 --port $PORT
+```
+
+The Gradio interface is served at `/`, while the API remains available at
+`/health`, `/research`, and `/research/{id}/stream`. Add your LLM API key as a
+Render environment secret.
+
+For local single-service testing, use port `5000`:
+
+```bash
+uvicorn server.combined:app --host 0.0.0.0 --port 5000
+```

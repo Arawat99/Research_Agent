@@ -14,7 +14,9 @@ or more complex pipelines without pulling in unnecessary dependencies.
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from typing import Callable, Optional
+from urllib.parse import urlparse
 
 import httpx
 
@@ -68,20 +70,51 @@ class ResearchAgent:
             url = result.get("url")
             if not url:
                 continue
+            search_snippet = result.get("snippet") or ""
             try:
                 source = fetch_source(url)
                 sources.append({
                     "title": source.title,
                     "url": str(source.url),
-                    "snippet": source.content[:600] if source.content else result.get("snippet", ""),
+                    "domain": source.domain or urlparse(str(source.url)).hostname or "",
+                    "published_date": source.published_date,
+                    "retrieved_date": source.retrieved_date.isoformat(),
+                    "snippet": source.snippet or search_snippet,
+                    "content": source.content or "",
                 })
             except httpx.ConnectError:
-                sources.append(result)
+                sources.append(self._search_source_metadata(result, search_snippet))
             except httpx.TimeoutException:
-                sources.append(result)
+                sources.append(self._search_source_metadata(result, search_snippet))
             except Exception:
-                sources.append(result)
+                sources.append(self._search_source_metadata(result, search_snippet))
         return sources
+
+    @staticmethod
+    def _search_source_metadata(result: dict, snippet: str) -> dict:
+        url = str(result.get("url", ""))
+        hostname = urlparse(url).hostname or ""
+        return {
+            "title": result.get("title") or url,
+            "url": url,
+            "domain": hostname.removeprefix("www."),
+            "published_date": result.get("published_date"),
+            "retrieved_date": datetime.now(timezone.utc).isoformat(),
+            "snippet": snippet,
+            "content": result.get("content", ""),
+        }
+
+    @staticmethod
+    def _format_source_context(source: dict) -> str:
+        return (
+            f"Title: {source.get('title', '')}\n"
+            f"URL: {source.get('url', '')}\n"
+            f"Domain: {source.get('domain', '')}\n"
+            f"Published date: {source.get('published_date') or 'Unknown'}\n"
+            f"Retrieved date: {source.get('retrieved_date') or 'Unknown'}\n"
+            f"Snippet: {source.get('snippet') or 'None'}\n"
+            f"Content: {source.get('content') or 'None'}"
+        )
 
     def _evidence_is_sufficient(self, sources: list[dict], min_sources: int = 2) -> bool:
         """Return True only when there is enough material to answer the question reliably."""
@@ -89,9 +122,17 @@ class ResearchAgent:
             return False
         return any((item.get("snippet") or "").strip() for item in sources)
 
-    def _safe_generate(self, prompt: str) -> str:
+    def _safe_generate(self, prompt: str, progress_callback: Callable[[dict], None] | None = None) -> str:
         """Generate a completion with a safe fallback when the provider is empty or malformed."""
         try:
+            if progress_callback is not None and hasattr(self.llm, "generate_stream"):
+                chunks = []
+                for chunk in self.llm.generate_stream(add_system_prompt(prompt, self.system_prompt)):
+                    chunks.append(chunk)
+                    progress_callback({"event": "answer_delta", "delta": chunk})
+                streamed = "".join(chunks).strip()
+                if streamed:
+                    return streamed
             return self.llm.generate(add_system_prompt(prompt, self.system_prompt))
         except OpenRouterError as exc:
             # Fallback providers should be used by default, but if the configured
@@ -107,13 +148,13 @@ class ResearchAgent:
                 f"Details: {exc}"
             )
 
-    def _finalize_answer(self, query: str, sources: list[dict]) -> str:
+    def _finalize_answer(self, query: str, sources: list[dict], progress_callback: Callable[[dict], None] | None = None) -> str:
         """Ask the LLM to answer once the evidence threshold has been reached."""
         if not sources:
             return self.ask(query)
 
         context = "\n\n".join(
-            f"Source: {item['title']}\nURL: {item['url']}\nContent: {item['snippet']}"
+            f"Source metadata:\n{self._format_source_context(item)}"
             for item in sources
         )
         prompt = (
@@ -124,9 +165,11 @@ class ResearchAgent:
             "=== TASK ===\n"
             "Answer the user's question using the evidence above. "
             "If the evidence is weak or incomplete, say so clearly. "
-            "Cite the source material and explain any uncertainty."
+            "Cite the source material and explain any uncertainty. "
+            "Return the answer itself now; do not describe a future investigation, "
+            "do not promise to inspect sources, and do not output planning commentary."
         )
-        return self._safe_generate(prompt)
+        return self._safe_generate(prompt, progress_callback=progress_callback)
 
     def research(
         self,
@@ -159,8 +202,9 @@ class ResearchAgent:
             if task is None:
                 break
 
+            search_question = f"{query}\nFocused sub-question: {task.question}"
             report("task_started", task_id=str(task.id), question=task.question)
-            new_sources = self._run_web_tools(task.question)
+            new_sources = self._run_web_tools(search_question)
             if new_sources:
                 collected_sources.extend(new_sources)
                 rounds_without_new_evidence = 0
@@ -173,20 +217,21 @@ class ResearchAgent:
                 task_id=str(task.id),
                 question=task.question,
                 sources_found=len(new_sources),
+                sources=new_sources,
                 completed_tasks=sum(item.status == TaskStatus.COMPLETED for item in tasks),
                 total_tasks=len(tasks),
             )
 
             if self._evidence_is_sufficient(collected_sources, min_sources=min_sources):
                 report("finalizing", sources_found=len(collected_sources))
-                return self._finalize_answer(query, collected_sources)
+                return self._finalize_answer(query, collected_sources, progress_callback=progress_callback)
 
             if rounds_without_new_evidence >= 2:
                 break
 
         if collected_sources:
             report("finalizing", sources_found=len(collected_sources))
-            return self._finalize_answer(query, collected_sources)
+            return self._finalize_answer(query, collected_sources, progress_callback=progress_callback)
 
         report("finalizing", sources_found=0)
         return self.ask(query)
@@ -204,7 +249,7 @@ class ResearchAgent:
             sources = self._run_web_tools(query)
             if sources:
                 context = "\n\n".join(
-                    f"Source: {item['title']}\nURL: {item['url']}\nContent: {item['snippet']}"
+                    f"Source metadata:\n{self._format_source_context(item)}"
                     for item in sources
                 )
                 enhanced_prompt = (

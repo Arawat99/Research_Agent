@@ -1,0 +1,311 @@
+{
+  "communities": {
+    "0": [
+      "app_agent_planner",
+      "app_agent_planner_rationale_1",
+      "app_agent_planner_rationale_20",
+      "app_agent_planner_rationale_31",
+      "app_agent_planner_rationale_41",
+      "app_agent_planner_rationale_72",
+      "app_agent_planner_researchplanner",
+      "app_agent_planner_researchplanner_create_plan",
+      "app_agent_planner_researchplanner_parse_llm_output",
+      "app_agent_planner_researchplanner_plan_prompt",
+      "app_models_evidence",
+      "app_models_init",
+      "app_models_init_rationale_1",
+      "app_models_task",
+      "app_models_task_prioritylevel",
+      "app_models_task_py_basemodel",
+      "app_models_task_py_enum",
+      "app_models_task_py_str",
+      "app_models_task_rationale_25",
+      "app_models_task_researchtask",
+      "app_models_task_taskstatus",
+      "int",
+      "uuid"
+    ],
+    "1": [
+      "app_llm_base",
+      "app_llm_base_llmbase",
+      "app_llm_base_llmbase_chat",
+      "app_llm_base_llmbase_generate",
+      "app_llm_base_llmbase_init",
+      "app_llm_base_llmbase_repr",
+      "app_llm_base_py_any",
+      "app_llm_base_rationale_1",
+      "app_llm_base_rationale_29",
+      "app_llm_base_rationale_40",
+      "app_llm_base_rationale_49",
+      "app_llm_base_rationale_61",
+      "app_llm_init",
+      "app_llm_init_rationale_1",
+      "app_llm_ollama",
+      "app_llm_ollama_rationale_1",
+      "app_llm_openrouter",
+      "app_llm_openrouter_rationale_1",
+      "app_llm_router",
+      "app_llm_router_rationale_1"
+    ],
+    "2": [
+      "app_models_source",
+      "app_models_source_py_basemodel",
+      "app_models_source_py_validator",
+      "app_models_source_rationale_11",
+      "app_models_source_source",
+      "app_models_source_source_title_non_empty",
+      "app_tools_fetch",
+      "app_tools_fetch_extract_visible_text",
+      "app_tools_fetch_fetch_source",
+      "app_tools_fetch_rationale_1",
+      "app_tools_fetch_rationale_18",
+      "app_tools_fetch_rationale_33",
+      "app_tools_init",
+      "app_tools_init_rationale_1",
+      "app_tools_search",
+      "app_tools_search_duckduckgo_html",
+      "app_tools_search_rationale_1",
+      "app_tools_search_rationale_21",
+      "app_tools_search_rationale_36",
+      "app_tools_search_web_search"
+    ],
+    "3": [
+      "app_agent_cli",
+      "app_agent_cli_ask",
+      "app_agent_cli_rationale_1",
+      "app_agent_cli_rationale_30",
+      "app_agent_init",
+      "app_agent_init_rationale_1",
+      "app_agent_research_agent",
+      "app_agent_research_agent_rationale_1",
+      "app_agent_research_agent_rationale_23",
+      "app_agent_research_agent_rationale_42",
+      "app_agent_research_agent_researchagent",
+      "app_agent_research_agent_researchagent_ask",
+      "app_agent_research_agent_researchagent_init",
+      "command",
+      "namespace",
+      "research",
+      "research_main",
+      "research_parse_args"
+    ],
+    "4": [
+      "app_llm_ollama_ollamaerror",
+      "app_llm_ollama_ollamallm",
+      "app_llm_ollama_ollamallm_chat",
+      "app_llm_ollama_ollamallm_del",
+      "app_llm_ollama_ollamallm_generate",
+      "app_llm_ollama_ollamallm_init",
+      "app_llm_ollama_ollamallm_post",
+      "app_llm_ollama_py_any",
+      "app_llm_ollama_py_runtimeerror",
+      "app_llm_ollama_rationale_28",
+      "app_llm_ollama_rationale_32",
+      "app_llm_ollama_rationale_47",
+      "app_llm_ollama_rationale_70",
+      "app_llm_ollama_rationale_86"
+    ],
+    "5": [
+      "app_llm_openrouter_openroutererror",
+      "app_llm_openrouter_openrouterllm",
+      "app_llm_openrouter_openrouterllm_chat",
+      "app_llm_openrouter_openrouterllm_del",
+      "app_llm_openrouter_openrouterllm_generate",
+      "app_llm_openrouter_openrouterllm_init",
+      "app_llm_openrouter_openrouterllm_post",
+      "app_llm_openrouter_py_any",
+      "app_llm_openrouter_py_runtimeerror",
+      "app_llm_openrouter_rationale_24",
+      "app_llm_openrouter_rationale_28",
+      "app_llm_openrouter_rationale_47",
+      "app_llm_openrouter_rationale_74",
+      "app_llm_openrouter_rationale_94"
+    ],
+    "6": [
+      "app_agent_planner_researchplanner_init",
+      "app_llm_router_get_llm",
+      "app_llm_router_provider_factory",
+      "app_llm_router_py_any",
+      "app_llm_router_rationale_38",
+      "app_llm_router_rationale_92",
+      "test_fallback"
+    ],
+    "7": [
+      "app_models_research",
+      "app_models_research_py_basemodel",
+      "app_models_research_py_enum",
+      "app_models_research_py_str",
+      "app_models_research_rationale_19",
+      "app_models_research_research",
+      "app_models_research_researchstatus"
+    ],
+    "8": [
+      "app_models_evidence_evidence",
+      "app_models_evidence_evidence_non_empty_support",
+      "app_models_evidence_py_basemodel",
+      "app_models_evidence_py_validator",
+      "app_models_evidence_rationale_11"
+    ],
+    "9": [
+      "app_init"
+    ]
+  },
+  "cohesion": {
+    "0": 0.15810276679841898,
+    "1": 0.1368421052631579,
+    "2": 0.13157894736842105,
+    "3": 0.1437908496732026,
+    "4": 0.17582417582417584,
+    "5": 0.21978021978021978,
+    "6": 0.3333333333333333,
+    "7": 0.3333333333333333,
+    "8": 0.4,
+    "9": 1.0
+  },
+  "gods": [
+    {
+      "id": "app_llm_base_llmbase",
+      "label": "LLMBase",
+      "degree": 13
+    },
+    {
+      "id": "app_agent_planner_researchplanner",
+      "label": "ResearchPlanner",
+      "degree": 10
+    },
+    {
+      "id": "app_llm_ollama_ollamallm",
+      "label": "OllamaLLM",
+      "degree": 10
+    },
+    {
+      "id": "app_llm_openrouter_openrouterllm",
+      "label": "OpenRouterLLM",
+      "degree": 10
+    },
+    {
+      "id": "app_llm_router_get_llm",
+      "label": "get_llm()",
+      "degree": 10
+    },
+    {
+      "id": "app_agent_research_agent_researchagent",
+      "label": "ResearchAgent",
+      "degree": 8
+    },
+    {
+      "id": "app_models_task_prioritylevel",
+      "label": "PriorityLevel",
+      "degree": 7
+    },
+    {
+      "id": "app_models_task_researchtask",
+      "label": "ResearchTask",
+      "degree": 7
+    },
+    {
+      "id": "app_models_source_source",
+      "label": "Source",
+      "degree": 7
+    },
+    {
+      "id": "app_llm_openrouter_openroutererror",
+      "label": "OpenRouterError",
+      "degree": 7
+    }
+  ],
+  "surprises": [
+    {
+      "source": "_provider_factory()",
+      "target": "LLMBase",
+      "source_files": [
+        "app/LLM/router.py",
+        "app/LLM/base.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "ResearchPlanner",
+      "target": "PriorityLevel",
+      "source_files": [
+        "app/agent/planner.py",
+        "app/models/task.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "ResearchPlanner",
+      "target": "ResearchTask",
+      "source_files": [
+        "app/agent/planner.py",
+        "app/models/task.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "ResearchPlanner",
+      "target": "TaskStatus",
+      "source_files": [
+        "app/agent/planner.py",
+        "app/models/task.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "OllamaLLM",
+      "target": "LLMBase",
+      "source_files": [
+        "app/LLM/ollama.py",
+        "app/LLM/base.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "inherits",
+      "why": "bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `get_llm()` connect `get_llm` to `models/__init__.py`, `LLMBase`, `ResearchAgent`?",
+      "why": "High betweenness centrality (0.519) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `_provider_factory()` connect `get_llm` to `LLMBase`, `OllamaLLM`, `OpenRouterLLM`?",
+      "why": "High betweenness centrality (0.161) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `LLMBase` connect `LLMBase` to `OllamaLLM`, `OpenRouterLLM`, `get_llm`?",
+      "why": "High betweenness centrality (0.154) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 3 inferred relationships involving `ResearchPlanner` (e.g. with `PriorityLevel` and `ResearchTask`) actually correct?",
+      "why": "`ResearchPlanner` has 3 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `LLMBase` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1368421052631579 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Source` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.13157894736842105 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `ResearchAgent` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1437908496732026 - nodes in this community are weakly interconnected."
+    }
+  ]
+}
