@@ -873,3 +873,17 @@ The final system should behave less like a chatbot that answers questions and mo
 *Built as a modular AI-agent project with the goal of later integrating specialized agents into a larger Agentic AI / Assistant Hub architecture.*
 
 *Developed with Claude Code.*
+
+## HTTP server
+
+Install the dependencies from `requirements.txt`, then start the API with:
+
+```bash
+python -m server.main
+```
+
+The server listens on `http://127.0.0.1:8000`. Start a research job with
+`POST /research`, then use `GET /research/{id}` for a JSON snapshot or connect
+an `EventSource` to `GET /research/{id}/stream` for task progress and the
+terminal `completed` or `failed` event. The existing CLI remains available
+through `python -m app.agent.cli`.

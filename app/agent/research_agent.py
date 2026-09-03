@@ -23,6 +23,7 @@ from app.LLM.openrouter import OpenRouterError
 from app.agent.planner import ResearchPlanner
 from app.agent.task_queue import TaskQueue
 from app.models.task import ResearchTask, TaskStatus
+from app.prompts.loader import add_system_prompt, load_prompts
 from app.tools.fetch import fetch_source
 from app.tools.search import web_search
 
@@ -45,6 +46,7 @@ class ResearchAgent:
     def __init__(self, model: str = "openrouter/free", provider: Optional[str] = None):
         # The LLM abstraction handles provider selection and endpoint config.
         self.llm = get_llm(model=model, provider=provider)
+        self.system_prompt = load_prompts()
 
     def _run_web_tools(self, query: str):
         """Run the search/fetch tools when the prompt needs live web grounding.
@@ -90,7 +92,7 @@ class ResearchAgent:
     def _safe_generate(self, prompt: str) -> str:
         """Generate a completion with a safe fallback when the provider is empty or malformed."""
         try:
-            return self.llm.generate(prompt)
+            return self.llm.generate(add_system_prompt(prompt, self.system_prompt))
         except OpenRouterError as exc:
             # Fallback providers should be used by default, but if the configured
             # provider still fails we return a useful answer instead of crashing.
@@ -132,13 +134,19 @@ class ResearchAgent:
         max_rounds: int = 3,
         min_sources: int = 2,
         num_tasks: int = 3,
+        progress_callback: Callable[[dict], None] | None = None,
     ) -> str:
         """Perform iterative research with a task queue until enough evidence is found."""
         if not isinstance(query, str) or not query.strip():
             raise ValueError("Query must be a non-empty string")
 
+        def report(event: str, **details: object) -> None:
+            if progress_callback is not None:
+                progress_callback({"event": event, **details})
+
         planner = ResearchPlanner(model="openrouter/free")
         tasks = planner.create_plan(query, num_tasks=num_tasks)
+        report("planned", total_tasks=len(tasks))
         queue = TaskQueue(tasks)
         collected_sources: list[dict] = []
         rounds_without_new_evidence = 0
@@ -151,6 +159,7 @@ class ResearchAgent:
             if task is None:
                 break
 
+            report("task_started", task_id=str(task.id), question=task.question)
             new_sources = self._run_web_tools(task.question)
             if new_sources:
                 collected_sources.extend(new_sources)
@@ -159,16 +168,27 @@ class ResearchAgent:
                 rounds_without_new_evidence += 1
 
             queue.mark_completed(task)
+            report(
+                "task_completed",
+                task_id=str(task.id),
+                question=task.question,
+                sources_found=len(new_sources),
+                completed_tasks=sum(item.status == TaskStatus.COMPLETED for item in tasks),
+                total_tasks=len(tasks),
+            )
 
             if self._evidence_is_sufficient(collected_sources, min_sources=min_sources):
+                report("finalizing", sources_found=len(collected_sources))
                 return self._finalize_answer(query, collected_sources)
 
             if rounds_without_new_evidence >= 2:
                 break
 
         if collected_sources:
+            report("finalizing", sources_found=len(collected_sources))
             return self._finalize_answer(query, collected_sources)
 
+        report("finalizing", sources_found=0)
         return self.ask(query)
 
     def ask(self, query: str) -> str:

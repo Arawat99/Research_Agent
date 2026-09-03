@@ -129,7 +129,7 @@ class OpenRouterLLM(LLMBase):
         payload = {
             "model": self.model,
             "messages": messages,
-            "max_tokens": 1024,
+            "max_tokens": 2048,
             "stream": False,
         }
         data = self._post("chat/completions", payload)

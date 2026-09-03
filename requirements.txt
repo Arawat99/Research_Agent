@@ -16,3 +16,10 @@ lxml
 
 # Document processing
 pymupdf
+
+# API
+fastapi
+uvicorn
+
+# Frontend
+gradio

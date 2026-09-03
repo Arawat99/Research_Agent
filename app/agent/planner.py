@@ -14,6 +14,7 @@ from uuid import UUID, uuid4
 
 from app.models.task import ResearchTask, PriorityLevel, TaskStatus
 from app.LLM import get_llm
+from app.prompts.loader import add_system_prompt, load_prompts
 
 
 class ResearchPlanner:
@@ -26,6 +27,7 @@ class ResearchPlanner:
     def __init__(self, model: str = "openrouter/free", provider: str | None = None):
         # Reuse the same LLM abstraction used by ``ResearchAgent``.
         self.llm = get_llm(model=model, provider=provider)
+        self.system_prompt = load_prompts()
 
     def _plan_prompt(self, question: str, num: int) -> str:
         """Construct a prompt that asks the LLM to output a JSON list of tasks."""
@@ -88,7 +90,9 @@ class ResearchPlanner:
             research_id = uuid4()
         # Ask the LLM for a JSON list of tasks.
         try:
-            raw = self.llm.generate(self._plan_prompt(question, num_tasks))
+            raw = self.llm.generate(
+                add_system_prompt(self._plan_prompt(question, num_tasks), self.system_prompt)
+            )
             task_strings = self._parse_llm_output(raw)
         except Exception:
             task_strings = []
