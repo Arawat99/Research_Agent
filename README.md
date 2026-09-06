@@ -2,6 +2,10 @@
 
 An **autonomous, evidence-based AI research agent** designed to investigate complex questions, gather information from multiple sources, evaluate evidence, verify claims, and produce structured research reports with citations.
 
+**Live Demo:** [Research Agent](https://research-agent-lala.onrender.com/)
+
+> **Project Status:** This is a personal project currently under development. The live demo showcases the current implementation of the research-agent workflow, with additional features and refinements planned.
+
 The project is designed as a **standalone research system first**, while maintaining a modular architecture that allows it to later operate as a **sub-agent or MCP service for a larger agentic AI system such as Assistant Hub**.
 
 Unlike a simple question-answering chatbot, the Research Agent follows a multi-step research workflow:

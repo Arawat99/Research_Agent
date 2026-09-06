@@ -85,7 +85,7 @@ class OpenRouterLLM(LLMBase):
         payload = {
             "model": self.model,
             "messages": messages,
-            "max_tokens": 512,
+            "max_tokens": 2048,
             "stream": False,
         }
         data = self._post("chat/completions", payload)
@@ -130,7 +130,7 @@ class OpenRouterLLM(LLMBase):
         payload = {
             "model": self.model,
             "messages": [{"role": "user", "content": prompt}],
-            "max_tokens": 512,
+            "max_tokens": 2048,
             "stream": True,
         }
         headers = {
