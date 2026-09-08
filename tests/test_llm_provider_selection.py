@@ -10,6 +10,7 @@ class LLMProviderSelectionTests(unittest.TestCase):
             "OPEN_ROUTER",
             "OPENROUTER_API_KEY",
             "OPENAI_API_KEY",
+            "OLLAMA_ENDPOINT",
         ]:
             os.environ.pop(key, None)
 
@@ -32,6 +33,12 @@ class LLMProviderSelectionTests(unittest.TestCase):
 
         llm = OpenRouterLLM("openrouter/free")
         self.assertEqual(llm.api_key, "test-key")
+
+    def test_unknown_provider_has_actionable_error(self):
+        from app.LLM import get_llm
+
+        with self.assertRaisesRegex(ValueError, "Supported"):
+            get_llm("model", provider="unknown")
 
 
 if __name__ == "__main__":
