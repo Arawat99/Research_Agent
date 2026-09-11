@@ -11,6 +11,50 @@ import gradio as gr
 from .api import request_json
 
 
+def status_chip(state: str, label: str, detail: str) -> str:
+    """Render the small online/offline indicator shown in the sidebar."""
+    return f"""
+        <div class="tool-status">
+            <div class="tool-status-dot {state}"></div>
+            <div>
+                <strong>{html.escape(label)}</strong>
+                <span>{html.escape(detail)}</span>
+            </div>
+        </div>
+        """
+
+
+def search_status() -> str:
+    """Query the backend for live SearXNG status and render the chip."""
+    try:
+        status = request_json("GET", "/search/status")
+    except RuntimeError:
+        return status_chip("offline", "Search tool", "Status service unreachable")
+    if not status.get("configured", False):
+        return status_chip("off", "Search tool", "Not configured")
+    if not status.get("online", False):
+        return status_chip("offline", "Search tool", "Offline · waking up?")
+    if not status.get("json_enabled", False):
+        return status_chip("warn", "Search tool", "Online · JSON API disabled")
+    return status_chip("online", "Search tool", "Online · ready")
+
+
+def wake_search() -> str:
+    """Ask the backend to wake the SearXNG service, then render its status.
+
+    Returned value wires straight into the same status chip, so the first
+    rendering reflects the freshly-woken state.
+    """
+    try:
+        request_json("POST", "/search/wake")
+    except RuntimeError:
+        pass
+    return search_status()
+
+
+STATUS_PLACEHOLDER = status_chip("off", "Search tool", "Checking…")
+
+
 def status_label(status: str) -> str:
     labels = {
         "pending": "Pending",

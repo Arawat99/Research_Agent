@@ -10,20 +10,26 @@ import gradio as gr
 
 if __package__:
     from .research import (
+        STATUS_PLACEHOLDER,
         follow_research,
         progress_html,
         reset_research,
+        search_status,
         sources_html,
         start_research,
+        wake_search,
     )
 else:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
     from frontend.research import (
+        STATUS_PLACEHOLDER,
         follow_research,
         progress_html,
         reset_research,
+        search_status,
         sources_html,
         start_research,
+        wake_search,
     )
 
 
@@ -71,6 +77,11 @@ with gr.Blocks(
                     </span>
                 </div>
                 """
+            )
+
+            search_tool_status = gr.HTML(
+                STATUS_PLACEHOLDER,
+                elem_classes="tool-status-area",
             )
 
             new_button = gr.Button(
@@ -340,6 +351,19 @@ with gr.Blocks(
             sources,
             error,
         ],
+    )
+
+    # --- Search-tool status: wake on first view, then poll live status -------
+
+    demo.load(
+        wake_search,
+        outputs=[search_tool_status],
+    )
+
+    search_timer = gr.Timer(value=15)
+    search_timer.tick(
+        search_status,
+        outputs=[search_tool_status],
     )
 
 

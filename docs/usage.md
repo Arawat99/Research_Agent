@@ -5,7 +5,6 @@
 This project expects to run inside a virtual environment:
 
 ```bash
-cd "/home/chrisjoshua/Personal AI Assistant/projects/research agent"
 source venv/bin/activate
 ```
 

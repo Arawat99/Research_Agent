@@ -1,20 +1,29 @@
 """Research planner – decomposes a high‑level research question into concrete tasks.
 
 The planner uses the project's LLM abstraction to ask an LLM to generate a JSON
-array of sub‑questions.  If the LLM call fails or the output cannot be parsed, a
-simple fallback splits the original question on punctuation.
+array of sub‑questions.  If the LLM call fails or the output cannot be parsed,
+a deterministic fallback generates focused research tasks from the original
+question instead of blindly splitting it on punctuation.
 """
 
 from __future__ import annotations
 
 import json
-import re
 from typing import List
 from uuid import UUID, uuid4
 
 from app.models.task import ResearchTask, PriorityLevel, TaskStatus
 from app.LLM import get_llm
 from app.prompts.loader import add_system_prompt, load_prompts
+
+
+def _tokenize(text: str) -> set[str]:
+    """Return lowercase alphanumeric word tokens in *text*."""
+    return {
+        "".join(ch for ch in token if ch.isalnum())
+        for token in text.lower().split()
+        if "".join(ch for ch in token if ch.isalnum())
+    }
 
 
 class ResearchPlanner:
@@ -67,6 +76,34 @@ class ResearchPlanner:
         lines = [line.strip("- *\t ") for line in cleaned.splitlines()]
         return [l for l in lines if l]
 
+    # Facet templates used when the LLM is unavailable.  Each template keeps the
+    # original question and targets one distinct research angle, so the resulting
+    # tasks stay specific and searchable instead of collapsing into generic noise.
+    _FACET_TEMPLATES = (
+        "Background and context for: {question}",
+        "Key facts, dates, and figures related to: {question}",
+        "Recent developments and updates about: {question}",
+        "Expert opinions and criticism related to: {question}",
+    )
+
+    def _fallback_plan(self, question: str, num_tasks: int) -> List[str]:
+        """Build a deterministic plan when the LLM produced no usable tasks.
+
+        A question that is already short and concrete is used as its own single
+        task — decomposing "What caused the 2008 crisis?" into sub-questions
+        would invent distinctions the question does not have.  Longer questions
+        are expanded into distinct research facets.
+        """
+        cleaned_question = " ".join(question.split())
+        if not cleaned_question:
+            return []
+
+        if len(_tokenize(cleaned_question)) <= 6:
+            return [cleaned_question]
+
+        facets = [template.format(question=cleaned_question) for template in self._FACET_TEMPLATES]
+        return facets[:num_tasks]
+
     def create_plan(
         self,
         question: str,
@@ -100,13 +137,20 @@ class ResearchPlanner:
         except Exception:
             task_strings = []
 
-        # If the LLM did not return usable tasks, fall back to a simple heuristic.
+        # If the LLM did not return usable tasks, build a deterministic plan
+        # from the original question rather than splitting it on punctuation.
         if not task_strings:
-            fragments = re.split(r"[\.\n;]", question)
-            task_strings = [frag.strip() for frag in fragments if frag.strip()][:num_tasks]
+            task_strings = self._fallback_plan(question, num_tasks)
 
-        # Trim to the requested number of tasks.
-        task_strings = task_strings[:num_tasks]
+        # Trim to the requested number of tasks and drop empty duplicates.
+        cleaned: List[str] = []
+        for task_text in task_strings:
+            stripped = " ".join(task_text.strip().split())
+            if stripped and stripped not in cleaned:
+                cleaned.append(stripped)
+            if len(cleaned) >= num_tasks:
+                break
+        task_strings = cleaned
 
         tasks: List[ResearchTask] = []
         for txt in task_strings:

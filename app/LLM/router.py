@@ -35,12 +35,20 @@ class FallbackLLM(LLMBase):
         last_error: Exception | None = None
         for provider in self.providers:
             try:
-                return getattr(provider, method)(*args, **kwargs)
+                response = getattr(provider, method)(*args, **kwargs)
             except Exception as exc:
                 last_error = exc
+                continue
+
+            # A provider that returns an empty or whitespace-only response is
+            # degraded, not successful.  Moving on gives the next provider a
+            # chance instead of returning blank output as a valid answer.
+            if isinstance(response, str) and response.strip():
+                return response
+
         if last_error:
             raise last_error
-        raise RuntimeError("FallbackLLM failed without an exception")
+        raise RuntimeError("No LLM provider returned a usable response")
 
     def generate(self, prompt: str) -> str:
         return self._run("generate", prompt)

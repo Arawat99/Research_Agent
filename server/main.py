@@ -4,12 +4,15 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
+import threading
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from threading import Condition, Lock
 from typing import Any, Iterator
 from uuid import UUID, uuid4
 
+import httpx
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -110,9 +113,76 @@ def _run_job(job: ResearchJob) -> None:
         job.publish("failed", error=job.error)
 
 
+def _searxng_base_url() -> str:
+    """Return the configured SearXNG instance URL, or an empty string."""
+    return os.getenv("SEARXNG_BASE_URL", "").strip().rstrip("/")
+
+
+def _probe_searxng() -> dict[str, Any]:
+    """Probe the SearXNG instance and report whether it is usable.
+
+    ``online`` reflects whether the search endpoint responds at all.  ``json_enabled``
+    reflects whether the ``format=json`` API the agent actually consumes is available —
+    instances frequently ship with only the HTML format enabled, which makes them
+    visible but unusable as a search backend.
+    """
+    base = _searxng_base_url()
+    if not base:
+        return {"configured": False, "online": False, "json_enabled": False}
+
+    try:
+        with httpx.Client(timeout=6.0, follow_redirects=True) as client:
+            client.get(f"{base}/search", params={"q": "ping"}).raise_for_status()
+            try:
+                json_response = client.get(
+                    f"{base}/search", params={"q": "ping", "format": "json"}
+                )
+                json_enabled = json_response.status_code == 200
+            except httpx.HTTPError:
+                json_enabled = False
+    except httpx.HTTPError:
+        return {"configured": True, "online": False, "json_enabled": False}
+
+    return {"configured": True, "online": True, "json_enabled": json_enabled}
+
+
+def wake_searxng() -> None:
+    """Fire-and-forget ping to the SearXNG instance to spin it up.
+
+    Render free services sleep after ~15 minutes of inactivity and take tens of
+    seconds to cold-start.  Issuing a background request here wakes the search
+    service while the app itself boots, so the two come up together.
+    """
+    base = _searxng_base_url()
+    if not base:
+        return
+
+    def _warm() -> None:
+        try:
+            with httpx.Client(timeout=60.0, follow_redirects=True) as client:
+                client.get(f"{base}/search", params={"q": "ping"})
+        except httpx.HTTPError:
+            pass
+
+    threading.Thread(target=_warm, daemon=True).start()
+
+
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get("/search/status")
+def search_status() -> dict[str, Any]:
+    """Return the live SearXNG status for the frontend indicator."""
+    return _probe_searxng()
+
+
+@app.post("/search/wake")
+def search_wake() -> dict[str, bool]:
+    """Wake the SearXNG instance in the background and return immediately."""
+    wake_searxng()
+    return {"waking": True}
 
 
 @app.post("/research", status_code=202)

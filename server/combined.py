@@ -11,7 +11,11 @@ os.environ["RESEARCH_API_URL"] = f"http://127.0.0.1:{os.getenv('PORT', '5000')}"
 import gradio as gr
 
 from frontend.app import CSS, demo
-from server.main import app as api_app
+from server.main import app as api_app, wake_searxng
+
+# Render free services sleep when idle.  Wake the paired SearXNG service the
+# moment this app boots so both spin up together.
+wake_searxng()
 
 
 app = gr.mount_gradio_app(

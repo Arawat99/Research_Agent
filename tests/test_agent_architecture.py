@@ -40,11 +40,13 @@ class ResearchAgentArchitectureTests(unittest.TestCase):
             answer_generator=generator,
         )
 
-        result = agent.research("research question", max_rounds=1)
+        # A query that does not itself trigger web research keeps the fallback
+        # path deterministic: one collection round, then the direct answer.
+        result = agent.research("validate the injected pipeline", max_rounds=1)
 
         self.assertEqual(result, "fallback")
         self.assertEqual(len(collector.queries), 1)
-        self.assertEqual(generator.prompts, ["research question"])
+        self.assertEqual(generator.prompts, ["validate the injected pipeline"])
 
     def test_synthesis_uses_collector_and_generator_contracts(self):
         collector = FakeCollector([

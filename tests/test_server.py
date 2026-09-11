@@ -1,7 +1,79 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
-from server.main import ResearchJob, ResearchRequest, _event_stream, _run_job
+import httpx
+from fastapi.testclient import TestClient
+
+from server.main import (
+    ResearchJob,
+    ResearchRequest,
+    _event_stream,
+    _probe_searxng,
+    _run_job,
+    app,
+)
+
+
+class SearXNGStatusTests(unittest.TestCase):
+    def test_unconfigured_instance_is_reported_offline(self):
+        with patch("server.main._searxng_base_url", return_value=""):
+            status = _probe_searxng()
+        self.assertEqual(status["configured"], False)
+        self.assertEqual(status["online"], False)
+        self.assertEqual(status["json_enabled"], False)
+
+    @patch("server.main.httpx.Client")
+    def test_online_with_json_api_available(self, client_class):
+        html_response = Mock()
+        html_response.raise_for_status.return_value = None
+        json_response = Mock(status_code=200)
+        client = client_class.return_value.__enter__.return_value
+        client.get.side_effect = [html_response, json_response]
+
+        with patch("server.main._searxng_base_url", return_value="https://searx.example.com"):
+            status = _probe_searxng()
+
+        self.assertEqual(status, {"configured": True, "online": True, "json_enabled": True})
+
+    @patch("server.main.httpx.Client")
+    def test_online_but_json_api_disabled(self, client_class):
+        html_response = Mock()
+        html_response.raise_for_status.return_value = None
+        json_response = Mock(status_code=403)
+        client = client_class.return_value.__enter__.return_value
+        client.get.side_effect = [html_response, json_response]
+
+        with patch("server.main._searxng_base_url", return_value="https://searx.example.com"):
+            status = _probe_searxng()
+
+        self.assertEqual(status["online"], True)
+        self.assertEqual(status["json_enabled"], False)
+
+    @patch("server.main.httpx.Client")
+    def test_offline_when_html_probe_fails(self, client_class):
+        client = client_class.return_value.__enter__.return_value
+        client.get.side_effect = httpx.ConnectError("no connection")
+
+        with patch("server.main._searxng_base_url", return_value="https://searx.example.com"):
+            status = _probe_searxng()
+
+        self.assertEqual(status["online"], False)
+        self.assertEqual(status["json_enabled"], False)
+
+    def test_status_endpoint_returns_probe(self):
+        with patch("server.main._probe_searxng", return_value={
+            "configured": True, "online": True, "json_enabled": True,
+        }):
+            response = TestClient(app).get("/search/status")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["online"], True)
+
+    @patch("server.main.wake_searxng")
+    def test_wake_endpoint_returns_immediately(self, wake):
+        response = TestClient(app).post("/search/wake")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {"waking": True})
+        wake.assert_called_once()
 
 
 class ServerTests(unittest.TestCase):

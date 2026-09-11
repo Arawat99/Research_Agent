@@ -6,3 +6,4 @@ used by higher‑level components such as the research planner.
 
 from .search import web_search  # noqa: F401
 from .fetch import fetch_source  # noqa: F401
+from .searxng import searxng_search  # noqa: F401

@@ -40,6 +40,52 @@ class LLMProviderSelectionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Supported"):
             get_llm("model", provider="unknown")
 
+    def test_fallback_moves_past_empty_provider_responses(self):
+        from app.LLM.router import FallbackLLM
+
+        class Provider:
+            def __init__(self, value):
+                self.value = value
+                self.calls = 0
+
+            def generate(self, prompt):
+                self.calls += 1
+                if callable(self.value):
+                    raise self.value
+                return self.value
+
+        provider_a = Provider("")
+        provider_b = Provider("real answer")
+        llm = FallbackLLM("model", providers=[provider_a, provider_b])
+
+        self.assertEqual(llm.generate("prompt"), "real answer")
+        self.assertEqual(provider_a.calls, 1)
+        self.assertEqual(provider_b.calls, 1)
+
+    def test_fallback_raises_when_every_provider_degraded(self):
+        from app.LLM.router import FallbackLLM
+
+        class EmptyProvider:
+            def generate(self, prompt):
+                return "   "
+
+        llm = FallbackLLM("model", providers=[EmptyProvider(), EmptyProvider()])
+
+        with self.assertRaisesRegex(RuntimeError, "usable response"):
+            llm.generate("prompt")
+
+    def test_fallback_retries_next_provider_once_one_raises(self):
+        from app.LLM.router import FallbackLLM
+
+        class Raising:
+            def generate(self, prompt):
+                raise RuntimeError("provider down")
+
+        llm = FallbackLLM("model", providers=[Raising(), Raising()])
+
+        with self.assertRaisesRegex(RuntimeError, "provider down"):
+            llm.generate("prompt")
+
 
 if __name__ == "__main__":
     unittest.main()

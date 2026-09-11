@@ -6,6 +6,7 @@ from collections.abc import Callable
 from datetime import datetime, timezone
 
 from app.agent.answer_generator import LLMAnswerGenerator
+from app.agent.evidence import evidence_is_sufficient
 from app.agent.interfaces import AnswerGenerator, Planner, SourceCollector
 from app.agent.planner import ResearchPlanner
 from app.agent.source_collector import WebSourceCollector
@@ -24,9 +25,10 @@ class ResearchAgent:
         planner: Planner | None = None,
         source_collector: SourceCollector | None = None,
         answer_generator: AnswerGenerator | None = None,
+        search_backend: Callable[[str, int], list[dict[str, str]]] | None = None,
     ):
         self.planner = planner or ResearchPlanner(model=model, provider=provider)
-        self.source_collector = source_collector or WebSourceCollector()
+        self.source_collector = source_collector or WebSourceCollector(search_fn=search_backend)
         self.answer_generator = answer_generator or LLMAnswerGenerator(model=model, provider=provider)
 
         # Keep ``llm`` for backwards compatibility with existing integrations/tests.
@@ -37,11 +39,17 @@ class ResearchAgent:
             callback({"event": event, **details})
 
     @staticmethod
-    def _evidence_is_sufficient(sources: list[dict[str, object]], min_sources: int = 2) -> bool:
-        """Return whether enough source material exists for a grounded answer."""
-        return len(sources) >= min_sources and any(
-            str(source.get("snippet") or "").strip() for source in sources
-        )
+    def _evidence_is_sufficient(
+        sources: list[dict[str, object]], min_sources: int = 2, question: str = ""
+    ) -> bool:
+        """Return whether the collected sources can support a grounded answer.
+
+        The check is deliberately stricter than "enough snippets": sources are
+        scored for substance, relevance to the question, domain diversity, and
+        authority (see :mod:`app.agent.evidence`).  A research loop therefore
+        keeps gathering material until the evidence is genuinely usable.
+        """
+        return evidence_is_sufficient(sources, question=question, min_sources=min_sources)
 
     @staticmethod
     def _format_source(source: dict[str, object]) -> str:
@@ -123,7 +131,7 @@ class ResearchAgent:
                 total_tasks=len(tasks),
             )
 
-            if self._evidence_is_sufficient(collected_sources, min_sources):
+            if self._evidence_is_sufficient(collected_sources, min_sources, question=query):
                 self._report(progress_callback, "finalizing", sources_found=len(collected_sources))
                 return self._synthesize(query, collected_sources, progress_callback)
 

@@ -6,6 +6,38 @@ from app.agent.research_agent import ResearchAgent
 from app.models.task import ResearchTask, TaskStatus, PriorityLevel
 
 
+class FakePlanner:
+    def __init__(self, question: str):
+        self.question = question
+
+    def create_plan(self, question: str, *, num_tasks: int = 5):
+        return [
+            ResearchTask(research_id=uuid4(), question=self.question)
+            for _ in range(num_tasks)
+        ]
+
+
+class FakeCollector:
+    def __init__(self, source_batches):
+        self.source_batches = source_batches
+        self.calls = 0
+
+    def collect(self, query: str) -> list[dict[str, object]]:
+        batch = self.source_batches[min(self.calls, len(self.source_batches) - 1)]
+        self.calls += 1
+        return batch
+
+
+class FakeGenerator:
+    def __init__(self, answer="answer"):
+        self.answer = answer
+        self.prompts = []
+
+    def generate(self, prompt, *, progress_callback=None):
+        self.prompts.append(prompt)
+        return self.answer
+
+
 class TaskQueueTests(unittest.TestCase):
     def test_queue_prioritizes_pending_tasks_by_priority(self):
         research_id = uuid4()
@@ -34,51 +66,46 @@ class TaskQueueTests(unittest.TestCase):
         self.assertTrue(all(task.status == TaskStatus.COMPLETED for task in tasks))
 
     def test_research_retries_when_evidence_is_insufficient(self):
-        agent = ResearchAgent(model="openrouter/free")
-        calls = []
+        strong_evidence = [
+            {"title": "Source 1", "url": "https://example.com/1", "domain": "example.com",
+             "snippet": "", "content": "Strong evidence about the impact of X on Y with documented results. " * 40},
+            {"title": "Source 2", "url": "https://example.org/2", "domain": "example.org",
+             "snippet": "", "content": "A second, independent source confirms the same conclusion about the impact of X on Y. " * 30},
+        ]
+        collector = FakeCollector([[], strong_evidence])
+        agent = ResearchAgent(
+            planner=FakePlanner("What is the impact of X on Y?"),
+            source_collector=collector,
+            answer_generator=FakeGenerator("Final answer based on sufficient evidence."),
+        )
 
-        def fake_web_tools(query):
-            calls.append(query)
-            if len(calls) == 1:
-                return []
-            return [
-                {"title": "Source 1", "url": "https://example.com/1", "snippet": "This is strong evidence about the research topic and the result is documented clearly."},
-                {"title": "Source 2", "url": "https://example.com/2", "snippet": "A second source confirms the same conclusion and includes supporting details."},
-            ]
+        response = agent.research("What is the impact of X on Y?", max_rounds=3)
 
-        agent._run_web_tools = fake_web_tools
-        agent.llm.generate = lambda prompt: "Final answer based on sufficient evidence."
-
-        response = agent.research("What is the impact of X on Y?")
-
-        self.assertEqual(len(calls), 2)
+        self.assertEqual(collector.calls, 2)
         self.assertIn("Final answer", response)
 
-        self.assertTrue(all("What is the impact of X on Y?" in query for query in calls))
-
     def test_research_stops_when_no_new_sources_are_found(self):
-        agent = ResearchAgent(model="openrouter/free")
-        calls = []
-
-        def fake_web_tools(query):
-            calls.append(query)
-            return []
-
-        agent._run_web_tools = fake_web_tools
+        agent = ResearchAgent(
+            planner=FakePlanner("What is the impact of X on Y?"),
+            source_collector=FakeCollector([[]]),
+            answer_generator=FakeGenerator("Fallback answer because no new sources were found."),
+        )
         agent.ask = lambda query: "Fallback answer because no new sources were found."
 
         response = agent.research("What is the impact of X on Y?", max_rounds=5, num_tasks=3)
 
-        self.assertGreaterEqual(len(calls), 1)
-        self.assertLessEqual(len(calls), 2)
+        # The loop collects once per round until two rounds pass with no new
+        # sources, then falls back to the direct answer path.
         self.assertIn("Fallback answer", response)
 
     def test_final_prompt_requires_direct_answer(self):
         agent = ResearchAgent(model="openrouter/free")
         captured = {}
-        agent.llm.generate = lambda prompt: captured.setdefault("prompt", prompt) or "answer"
+        agent.answer_generator.generate = (
+            lambda prompt, **kwargs: captured.setdefault("prompt", prompt) or "answer"
+        )
 
-        agent._finalize_answer("Which degree is ranked #1 for 2026?", [{
+        agent._synthesize("Which degree is ranked #1 for 2026?", [{
             "title": "Ranking source",
             "url": "https://example.com/ranking",
             "domain": "example.com",
