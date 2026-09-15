@@ -186,15 +186,15 @@
     "semantic_hash": ""
   },
   "docs/usage.md": {
-    "mtime": 1789139783.8255217,
-    "seen": 1789140231.7889974,
-    "ast_hash": "01354d9c8d66e60f4282c11ebfc1c045",
+    "mtime": 1789437438.8163402,
+    "seen": 1789437562.157202,
+    "ast_hash": "e33bd4b1885e3ef7ebb8b84e05a8cc52",
     "semantic_hash": ""
   },
   "requirements.txt": {
-    "mtime": 1788414024.137186,
-    "seen": 1788415219.9146628,
-    "ast_hash": "75a78fa3e52a49112e478af3010f8280",
+    "mtime": 1789435389.23299,
+    "seen": 1789437562.1575685,
+    "ast_hash": "7fda6f3ad66f13f345b916790d277c24",
     "semantic_hash": ""
   },
   "app/prompts/loader.py": {
@@ -333,6 +333,48 @@
     "mtime": 1789430203.6380932,
     "seen": 1789430506.8934166,
     "ast_hash": "608d01f019c8b1dd7ae67191c2d80a12",
+    "semantic_hash": ""
+  },
+  "app/mcp/__init__.py": {
+    "mtime": 1789436270.7519333,
+    "seen": 1789437562.1496794,
+    "ast_hash": "8db35bbf084331a7789e87f3ef74fed9",
+    "semantic_hash": ""
+  },
+  "app/mcp/arxiv.py": {
+    "mtime": 1789436256.8551304,
+    "seen": 1789437562.1496897,
+    "ast_hash": "4c433856e88457761e4ff896412c049b",
+    "semantic_hash": ""
+  },
+  "app/mcp/client.py": {
+    "mtime": 1789436236.6934204,
+    "seen": 1789437562.1496933,
+    "ast_hash": "fca9ea1336839aa68b1a3d08d63ed15e",
+    "semantic_hash": ""
+  },
+  "app/mcp/compose.py": {
+    "mtime": 1789436264.6753767,
+    "seen": 1789437562.1496964,
+    "ast_hash": "82ae6c83e96006f90bb44ebda991146f",
+    "semantic_hash": ""
+  },
+  "app/mcp/config.py": {
+    "mtime": 1789436226.8793352,
+    "seen": 1789437562.1496997,
+    "ast_hash": "79c289ef79f46f36c8466cc5c78f6b13",
+    "semantic_hash": ""
+  },
+  "app/mcp/purili.py": {
+    "mtime": 1789436246.1985965,
+    "seen": 1789437562.149702,
+    "ast_hash": "94631f32ff53cde7a03b41640e417dc6",
+    "semantic_hash": ""
+  },
+  "tests/test_mcp_search.py": {
+    "mtime": 1789436741.176901,
+    "seen": 1789437562.154959,
+    "ast_hash": "0a7b055137f7e7f3d2dd47369850d9c4",
     "semantic_hash": ""
   }
 }

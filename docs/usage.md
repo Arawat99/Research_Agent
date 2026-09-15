@@ -79,6 +79,121 @@ export OLLAMA_ENDPOINT=http://localhost:11434
 agent = ResearchAgent(model="openrouter/free", provider="openrouter")
 ```
 
+## MCP search providers
+
+The default search backend scrapes DuckDuckGo. For stronger coverage, the
+`app.mcp` package adapts **MCP search servers** to the same
+`search_backend` interface the agent already accepts:
+
+- **Puri.li** (`app/mcp/purili.py`) — hosted MCP web search over streamable
+  HTTP, no API key, with its own independent index. Also offers
+  `search_domain` for restricting results to one site.
+- **arxiv-mcp-server** (`app/mcp/arxiv.py`) — local stdio server that searches
+  the arXiv API (no API key) and enforces arXiv's ~3-second rate limit.
+
+No code changes are needed in the pipeline; pass the adapters in directly:
+
+```python
+from app.mcp import arxiv_search, fallback_search, web_search
+
+# Use Puri.li as the primary backend:
+agent = ResearchAgent(model="openrouter/free", search_backend=web_search)
+
+# Try Puri.li, then arxiv, then the built-in DuckDuckGo search:
+from app.tools.search import web_search as ddg_search
+
+agent = ResearchAgent(
+    model="openrouter/free",
+    search_backend=fallback_search(web_search, arxiv_search, ddg_search),
+)
+```
+
+### Merge results instead of falling back
+
+When more evidence beats a single backend's coverage, `union_search` runs
+every backend and merges the results (deduplicated by URL, capped at
+`max_results`):
+
+```python
+from app.mcp import arxiv_search, union_search, web_search
+
+# Combine Puri.li general web + arXiv papers in one result set:
+agent = ResearchAgent(model="openrouter/free",
+                      search_backend=union_search(web_search, arxiv_search))
+```
+
+### Recover page content via Puri.li
+
+A bare search snippet is not always enough to ground a claim. The collector
+keeps richer content in three ways — inline (e.g. an arXiv abstract attached
+to the result), a direct page fetch, and a content fallback such as Puri.li's
+`get_context` for pages a plain HTTP fetch cannot read:
+
+```python
+from app.agent import ResearchAgent
+from app.mcp import web_search, get_context
+
+# Fall back to Puri.li's stored copy when the page itself cannot be fetched:
+agent = ResearchAgent(
+    model="openrouter/free",
+    content_backend=get_context,
+)
+```
+
+### Scope-aware searching
+
+Backends that accept extra keywords (e.g. arXiv's `sort_by`/`categories`) can
+be scoped per query without the agent hard-coding one backend. Pass a scope
+through the collector, and it forwards only the keys the backend understands:
+
+```python
+agent = ResearchAgent(
+    model="openrouter/free",
+    search_backend=arxiv_search,
+    search_scope={"domain": "arxiv.org"},          # example, see arxiv signature
+)
+
+# Or per-query on the underlying collector:
+collector.collect("query", scope={"categories": ["cs.AI"], "sort_by": "date"})
+```
+
+Scope keys a backend does not accept are dropped, so a plain DuckDuckGo
+backend is never handed arguments it does not understand.
+
+### Install the arXiv server
+
+Puri.li needs nothing to install; the arXiv adapter needs the local server on
+`PATH` (install once):
+
+```bash
+pip install uv
+uv tool install arxiv-mcp-server
+```
+
+If the binary is not on `PATH`, point the adapter at it or use another launcher:
+
+```bash
+export ARXIV_COMMAND="/home/you/.local/bin/arxiv-mcp-server"   # or "uvx"
+```
+
+### Configuration
+
+```text
+PURLI_URL            Puri.li MCP endpoint            (default https://puri.li/mcp)
+PURLI_SEARCH_TIMEOUT Puri.li timeout seconds         (default 30)
+ARXIV_COMMAND        arxiv-mcp-server executable     (default arxiv-mcp-server)
+ARXIV_SEARCH_TIMEOUT arXiv stdio timeout seconds     (default 60)
+```
+
+### Behaviour
+
+- Results are normalised to `[{title, url, snippet}]`, the same shape all
+  other backends produce, so deduplication and evidence scoring are unchanged.
+- arXiv papers use their abstract page URL (`https://arxiv.org/abs/...`) so the
+  normal page-fetching step can read them.
+- Like the built-in search, transient failures degrade to an empty list instead
+  of raising, so the research loop can fall back to another backend.
+
 ## Command line usage
 
 Run the CLI from the project root:

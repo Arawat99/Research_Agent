@@ -122,5 +122,114 @@ class ResearchToolsTests(unittest.TestCase):
         self.assertEqual(result, "no evidence answer")
 
 
+class CollectorContentTests(unittest.TestCase):
+    """Content recovery: inline search content, fallback fetch, and scope."""
+
+    @patch("app.agent.source_collector.fetch_source")
+    def test_uses_inline_search_content_without_fetching(self, fetch_source_mock):
+        from app.agent.source_collector import WebSourceCollector
+
+        results = [
+            {"title": "Paper", "url": "https://arxiv.org/abs/2301.00001",
+             "snippet": "abs", "content": "Some abstract about learning."}
+        ]
+        sources = WebSourceCollector(search_fn=lambda q, n: results).collect("q")
+
+        self.assertEqual(len(sources), 1)
+        self.assertEqual(sources[0]["content"], "Some abstract about learning.")
+        self.assertEqual(sources[0]["content_source"], "search_result")
+        fetch_source_mock.assert_not_called()
+
+    @patch("app.agent.source_collector.fetch_source")
+    def test_content_fn_rescues_pages_the_fetch_cannot_read(self, fetch_source_mock):
+        from app.agent.source_collector import WebSourceCollector
+
+        fetch_source_mock.side_effect = RuntimeError("unreachable")
+        results = [{"title": "Page", "url": "https://example.com/js", "snippet": "s"}]
+        content_fn = lambda url: "Full text recovered via MCP."
+
+        sources = WebSourceCollector(
+            search_fn=lambda q, n: results,
+            content_fn=content_fn,
+        ).collect("q")
+
+        self.assertEqual(len(sources), 1)
+        self.assertEqual(sources[0]["content"], "Full text recovered via MCP.")
+        self.assertEqual(sources[0]["content_source"], "fallback")
+
+    @patch("app.agent.source_collector.fetch_source")
+    def test_degrades_to_metadata_when_fetch_and_fallback_fail(self, fetch_source_mock):
+        from app.agent.source_collector import WebSourceCollector
+
+        fetch_source_mock.side_effect = RuntimeError("unreachable")
+        long_snippet = ("A search snippet long enough on its own to ground a claim even when "
+                        "the page itself could not be recovered.")
+        results = [{"title": "Page", "url": "https://example.com/blocked", "snippet": long_snippet}]
+
+        sources = WebSourceCollector(
+            search_fn=lambda q, n: results,
+            content_fn=lambda url: None,
+        ).collect("q")
+
+        self.assertEqual(len(sources), 1)
+        self.assertEqual(sources[0]["content"], "")
+        self.assertNotIn("content_source", sources[0])
+
+    @patch("app.agent.source_collector.fetch_source")
+    def test_forwards_scope_to_keyword_capable_backend(self, fetch_source_mock):
+        from app.agent.source_collector import WebSourceCollector
+
+        fetch_source_mock.side_effect = RuntimeError("unreachable")
+        calls = []
+
+        def scoped_backend(query, max_results, *, domain=None):
+            calls.append((query, max_results, domain))
+            return [{
+                "title": "t",
+                "url": f"https://{domain}/x",
+                # Long enough on its own to survive the usability filter when the
+                # page itself cannot be fetched.
+                "snippet": ("A snippet long enough to ground a claim on its own even "
+                            "when the page cannot be recovered."),
+            }]
+
+        sources = WebSourceCollector(search_fn=scoped_backend).collect(
+            "q", scope={"domain": "arxiv.org", "unknown": "dropped"}
+        )
+
+        self.assertEqual(len(sources), 1)
+        self.assertEqual(sources[0]["url"], "https://arxiv.org/x")
+        self.assertEqual(calls, [("q", 3, "arxiv.org")])
+
+    def test_constructor_scope_merges_with_call_scope(self):
+        from app.agent.source_collector import WebSourceCollector
+
+        calls = []
+
+        def scoped_backend(query, max_results, *, domain=None, categories=None):
+            calls.append((query, max_results, domain, categories))
+            return [{"title": "t", "url": "https://example.com/x", "snippet": "s"}]
+
+        collector = WebSourceCollector(
+            search_fn=scoped_backend, search_scope={"domain": "example.com"}
+        )
+        collector.collect("q", scope={"categories": ["cs.AI"]})
+
+        self.assertEqual(calls, [("q", 3, "example.com", ["cs.AI"])])
+
+    def test_plain_backend_receives_no_scope(self):
+        from app.agent.source_collector import WebSourceCollector
+
+        calls = []
+
+        def plain_backend(query, max_results):
+            calls.append((query, max_results))
+            return [{"title": "t", "url": "https://example.com/x", "snippet": "s"}]
+
+        WebSourceCollector(search_fn=plain_backend).collect("q", scope={"domain": "x"})
+
+        self.assertEqual(calls, [("q", 3)])
+
+
 if __name__ == "__main__":
     unittest.main()

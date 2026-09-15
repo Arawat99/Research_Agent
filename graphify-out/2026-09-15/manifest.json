@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "app/LLM/router.py": {
-    "mtime": 1789036909.6601567,
-    "seen": 1789037475.8476305,
-    "ast_hash": "b1b6ad9f4428aa5c63bde3050bfbb4ad",
+    "mtime": 1789430188.2084455,
+    "seen": 1789430506.8934114,
+    "ast_hash": "ab1ba4ac9971ab27592903550340357d",
     "semantic_hash": ""
   },
   "app/__init__.py": {
@@ -138,9 +138,9 @@
     "semantic_hash": ""
   },
   "tests/test_llm_provider_selection.py": {
-    "mtime": 1789037254.02689,
-    "seen": 1789037475.8517923,
-    "ast_hash": "c18395ee0ed06bc491d9a17d4e1bf3c8",
+    "mtime": 1789430353.3277664,
+    "seen": 1789430506.8988132,
+    "ast_hash": "474423561ed22b5e0cf8c3ef1495b864",
     "semantic_hash": ""
   },
   "tests/test_research_tools.py": {
@@ -327,6 +327,12 @@
     "mtime": 1789117840.0699587,
     "seen": 1789118007.0884352,
     "ast_hash": "ab52d9c4fb7f07ea80e5202df71a8d15",
+    "semantic_hash": ""
+  },
+  "app/LLM/xkiro.py": {
+    "mtime": 1789430203.6380932,
+    "seen": 1789430506.8934166,
+    "ast_hash": "608d01f019c8b1dd7ae67191c2d80a12",
     "semantic_hash": ""
   }
 }

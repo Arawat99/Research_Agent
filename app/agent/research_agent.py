@@ -25,10 +25,16 @@ class ResearchAgent:
         planner: Planner | None = None,
         source_collector: SourceCollector | None = None,
         answer_generator: AnswerGenerator | None = None,
-        search_backend: Callable[[str, int], list[dict[str, str]]] | None = None,
+        search_backend: Callable[..., list[dict[str, str]]] | None = None,
+        content_backend: Callable[[str], str | None] | None = None,
+        search_scope: dict[str, object] | None = None,
     ):
         self.planner = planner or ResearchPlanner(model=model, provider=provider)
-        self.source_collector = source_collector or WebSourceCollector(search_fn=search_backend)
+        self.source_collector = source_collector or WebSourceCollector(
+            search_fn=search_backend,
+            content_fn=content_backend,
+            search_scope=search_scope,
+        )
         self.answer_generator = answer_generator or LLMAnswerGenerator(model=model, provider=provider)
 
         # Keep ``llm`` for backwards compatibility with existing integrations/tests.
