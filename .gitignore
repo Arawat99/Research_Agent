@@ -1,6 +1,4 @@
-.claude
 .env
-CLAUDE.md
 project boundaries
 venv
 docs/graphify-out
