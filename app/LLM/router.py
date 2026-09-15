@@ -9,9 +9,27 @@ from typing import Any
 from .base import LLMBase
 from .ollama import OllamaLLM
 from .openrouter import OpenRouterLLM
+from .xkiro import XkiroLLM
 
 
 ProviderFactory = Callable[[str], LLMBase]
+
+# Free-tier xKiro model used when the caller's model id cannot reach the account.
+# Paid/premium xKiro models (e.g. "openai/gpt-5.6-sol") return HTTP 403 for
+# accounts funded with promotional credits, and the shared app default
+# ("openrouter/free") is an OpenRouter id that xKiro does not recognise.
+XKIRO_DEFAULT_MODEL = "qwen/qwen3.7-plus:free"
+
+
+def _resolve_xkiro_model(model: str) -> str:
+    """Pick a model id the xKiro account can serve.
+
+    Explicit ``vendor/model`` ids are honored unchanged.  The app's OpenRouter
+    flavoured default is substituted with a free-tier xKiro model.
+    """
+    if model and model != "openrouter/free" and "/" in model:
+        return model
+    return XKIRO_DEFAULT_MODEL
 
 
 def _provider_factories(**kwargs: Any) -> dict[str, ProviderFactory]:
@@ -19,6 +37,7 @@ def _provider_factories(**kwargs: Any) -> dict[str, ProviderFactory]:
     return {
         "ollama": lambda model: OllamaLLM(model, **kwargs),
         "openrouter": lambda model: OpenRouterLLM(model, **kwargs),
+        "xkiro": lambda model: XkiroLLM(_resolve_xkiro_model(model), **kwargs),
     }
 
 
@@ -60,7 +79,11 @@ class FallbackLLM(LLMBase):
 def _build_fallback(model: str, **kwargs: Any) -> FallbackLLM:
     """Construct available providers without failing during optional setup."""
     providers: list[LLMBase] = []
+    # xKiro is the primary provider; the remaining entries are failover targets
+    # tried in order when an earlier provider is unavailable or degraded.  xKiro
+    # receives a free-tier model id rather than the shared app default.
     for factory in (
+        lambda: XkiroLLM(_resolve_xkiro_model(model), **kwargs),
         lambda: OpenRouterLLM(model, **kwargs),
         lambda: OllamaLLM(model, **kwargs),
     ):
@@ -77,7 +100,7 @@ def _resolve_default_provider() -> str:
     if configured:
         return configured
 
-    if any(os.getenv(key) for key in ("OPEN_ROUTER", "OPENROUTER_API_KEY", "OPENAI_API_KEY")):
+    if any(os.getenv(key) for key in ("OPEN_ROUTER", "OPENROUTER_API_KEY", "OPENAI_API_KEY", "XKIRO_API_KEY")):
         return "fallback"
     if os.getenv("OLLAMA_ENDPOINT"):
         return "ollama"
